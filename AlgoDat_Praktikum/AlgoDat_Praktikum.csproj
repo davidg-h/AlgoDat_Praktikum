@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Code\LinkedList\" />
+    <Folder Include="Code\BinSearchTree\" />
+    <Folder Include="Code\AVLTree\" />
+    <Folder Include="Code\Hash\" />
+    <Folder Include="Code\Treap\" />
+  </ItemGroup>
+
+</Project>
