@@ -8,6 +8,6 @@ namespace AlgoDat_Praktikum.Code.Array
 {
     class ExampleFile
     {
-        int VincentPushtalsErster;
+        int PushSuccess;
     }
 }
