@@ -8,6 +8,6 @@ namespace AlgoDat_Praktikum.Code.Array
 {
     class ExampleFile
     {
-        /*Example File delete if not used*/
+        int VincentPushtalsErster;
     }
 }
