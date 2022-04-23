@@ -16,7 +16,8 @@ namespace AlgoDat_Praktikum
             switch (userInput)
             {
                 case "1":
-                    // TODO: let your class handle the console inputs for more legible code in the main after user enters a concrete data type (s.r.: example)
+                    // TODO: let your class handle the console inputs and error handling (no negative integers)
+                    // for more legible code in the main after user enters a concrete data type (s.r.: example)
                     Console.WriteLine("Wähle den konkreten Datentyp aus");
                     Console.WriteLine("a (Array)");
                     Console.WriteLine("l (Liste)");
