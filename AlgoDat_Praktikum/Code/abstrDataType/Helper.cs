@@ -16,7 +16,7 @@ namespace AlgoDat_Praktikum.Code.abstrDataType
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
-        public abstract (bool, int) _search(int elem);
+        public abstract (bool, int) _search(int elem); //has to be private when implemented s.r.: Praktikums-Aufgabestellung S.12 (delete this comment after implementation)
 
         public virtual bool search(int elem)
         {
