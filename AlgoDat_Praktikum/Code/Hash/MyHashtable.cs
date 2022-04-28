@@ -14,6 +14,7 @@ namespace AlgoDat_Praktikum.Code.Array
 
         public MyHashtable(int size){
             this.size = size;
+            //TODO: set size to next prime
             memory = new int[size];
             for (int i = 0; i < memory.Length; i++)
             {
