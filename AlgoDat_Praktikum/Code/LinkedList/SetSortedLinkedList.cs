@@ -9,10 +9,27 @@ using AlgoDat_Praktikum.Code.abstrDataType;
 
 namespace AlgoDat_Praktikum.Code.LinkedList
 {
-    class SetSortedLinkedList: Helper, ISetSorted
+    class SetSortedLinkedList : Helper, ISetSorted
     {
         //hier dürfen gleiche elemente NICHT mehrmals vorkommen und müssen sortiert sein
+        public override bool delete(int elem)
+        {
+            throw new NotImplementedException();
+        }
 
-        
+        public override bool insert(int elem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void print()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override (bool, int) _search(int elem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
