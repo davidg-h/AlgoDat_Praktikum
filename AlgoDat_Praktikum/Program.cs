@@ -8,46 +8,60 @@ namespace AlgoDat_Praktikum
         static void Main(string[] args)
         {
             Console.WriteLine("Wähle den abstrakten Datentypen aus:");
-            Console.WriteLine("1.Stack");
-            Console.WriteLine("2.Queue");
-            Console.WriteLine("3.Hash");
-            Console.WriteLine("...");
+            Console.WriteLine("1. MultiSet unsorted");
+            Console.WriteLine("2. Set unsorted");
+            Console.WriteLine("3. MultiSet sorted");
+            Console.WriteLine("4. Set sorted");
 
             string userInput = Console.ReadLine();
 
+            Console.WriteLine("Wähle den konkreten Datentyp aus");
             switch (userInput)
             {
                 case "1":
                     // TODO: let your class handle the console inputs and error handling (only not negative numbers)
                     // for more legible code in the main after user enters a concrete data type (s.r.: example)
-                    Console.WriteLine("Wähle den konkreten Datentyp aus");
-                    Console.WriteLine("a (Array)");
-                    Console.WriteLine("l (Liste)");
-                    Console.WriteLine("...");
+                    Console.WriteLine("a. MultiSetUnsorted Array");
+                    Console.WriteLine("c. MultiSetUnsorted LinkedList");
                     userInput = Console.ReadLine();
                     break;
+
                 case "2":
-                    // TODO: do the same as in case 1
-                    break;
-                case "3":
+                    Console.WriteLine("a. Hash"); // -> im handler noch Auswahl einteilen in SepChain oder QuadProp
+                    Console.WriteLine("b. SetUnsorted Array");
+                    Console.WriteLine("c. SetUnsorted LinkedList");
+                    userInput = Console.ReadLine();
                     HashHandler hashHandler = new HashHandler();
                     hashHandler.handle();
                     break;
-                case "...":
-                    // TODO: add other cases
+
+                case "3":
+                    Console.WriteLine("a. MultiSetSorted Array");
+                    Console.WriteLine("b. MultiSetSorted LinkedList");
+                    userInput = Console.ReadLine();
+                    break;
+
+                case "4":
+                    Console.WriteLine("a. BinSearchTree");
+                    Console.WriteLine("b. Treap");
+                    Console.WriteLine("c. AVLTree");
+                    Console.WriteLine("d. SetSorted Array");
+                    Console.WriteLine("e. SetSorted LinkedList");
+                    userInput = Console.ReadLine();
                     break;
             }
         }
     }
 
-    class HashHandler {
+    class HashHandler
+    {
 
         MyHashtable hashtable;
         int Size;
 
         public HashHandler()
         {
-            
+
         }
         public void handle()
         {
@@ -64,9 +78,11 @@ namespace AlgoDat_Praktikum
             }
             switch (selection)
             {
-                case 1: insertData();
+                case 1:
+                    insertData();
                     break;
-                case 2: generateRandom();
+                case 2:
+                    generateRandom();
                     break;
                 default:
                     Console.WriteLine("Schlechte Eingabe");
@@ -108,7 +124,7 @@ namespace AlgoDat_Praktikum
             Random r = new Random();
             for (int i = 0; i < Size; i++)
             {
-                hashtable.insert2( r.Next(0, Size * 2), r.Next(0, Size * 2));
+                hashtable.insert2(r.Next(0, Size * 2), r.Next(0, Size * 2));
             }
             hashtable.print();
         }
@@ -122,7 +138,8 @@ namespace AlgoDat_Praktikum
             Console.WriteLine("Wie groß soll dein Hashtable sein?");
             string input = Console.ReadLine();
             int size;
-            while (!Int32.TryParse(input, out size)){
+            while (!Int32.TryParse(input, out size))
+            {
                 Console.WriteLine("das ist leider keine Zahl :<");
                 Console.WriteLine("Wie groß soll dein Hashtable sein?");
                 input = Console.ReadLine();
