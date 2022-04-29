@@ -1,7 +1,7 @@
 ﻿namespace AlgoDat_Praktikum.Code.Interfaces
 {
-    interface ISearchHelper
+    interface ISearchHelper<T> : IDictionary
     {
-        (bool successfulInsert, int elemPos) SearchHelper { get; set; }
+        (bool successfulInsert, T elemPos) SearchHelper { get; set; }
     }
 }

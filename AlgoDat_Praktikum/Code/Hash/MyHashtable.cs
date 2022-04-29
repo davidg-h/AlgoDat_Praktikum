@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlgoDat_Praktikum.Code.Interfaces;
+using System;
 using System.Collections;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AlgoDat_Praktikum.Code.Array
 {
-    public class MyHashtable
+    public class MyHashtable //: ISetUnsorted<int> Vincent implemntier noch das Interface laut Diagram
     {
         int size;
         int[] memory;
