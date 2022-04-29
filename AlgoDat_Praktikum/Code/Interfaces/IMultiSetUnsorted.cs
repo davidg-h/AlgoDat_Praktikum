@@ -1,6 +1,6 @@
 ﻿namespace AlgoDat_Praktikum.Code.Interfaces
 {
-    interface IMultiSetUnsorted : IDictionary 
+    interface IMultiSetUnsorted <T> : ISearchHelper<T>
     {
         //bool checkMultiSet(int elem);
     }

@@ -1,4 +1,4 @@
 ﻿namespace AlgoDat_Praktikum.Code.Interfaces
 {
-    interface ISetSorted : IDictionary { }
+    interface ISetSorted<T> : ISearchHelper<T> { }
 }

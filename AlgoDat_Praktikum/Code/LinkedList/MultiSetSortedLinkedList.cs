@@ -9,15 +9,18 @@ using AlgoDat_Praktikum.Code.abstrDataType;
 
 namespace AlgoDat_Praktikum.Code.LinkedList
 {
-    class MultiSetSortedLinkedList : Helper, IMultiSetSorted
+    class MultiSetSortedLinkedList : List, IMultiSetSorted<int>
     {
         //hier dürfen gleiche elemente mehrmals vorkommen und müssen sortiert sein
-        public override bool delete(int elem)
+
+        public (bool successfulInsert, int elemPos) SearchHelper { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public bool delete(int elem)
         {
             throw new NotImplementedException();
         }
 
-        public override bool insert(int elem)
+        public bool insert(int elem)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +30,7 @@ namespace AlgoDat_Praktikum.Code.LinkedList
             throw new NotImplementedException();
         }
 
-        public override (bool, int) _search(int elem)
+        public bool search(int elem)
         {
             throw new NotImplementedException();
         }
