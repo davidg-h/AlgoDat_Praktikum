@@ -15,6 +15,7 @@ namespace AlgoDat_Praktikum.Code.BinSearchTree
 
         
     }
+    // das unten kannst du auch als Konstruktor in die klasse Node reinschreiben
     public static Node(int elem)
     {
         Node node = new Node();
