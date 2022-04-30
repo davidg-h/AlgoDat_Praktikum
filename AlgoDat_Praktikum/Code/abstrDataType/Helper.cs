@@ -1,6 +1,7 @@
 ﻿using System;
 using AlgoDat_Praktikum.Code.Interfaces;
 
+//ist obsolete wegen dem interface ISearchHelper
 namespace AlgoDat_Praktikum.Code.abstrDataType
 {
     public abstract class Helper : IDictionary
