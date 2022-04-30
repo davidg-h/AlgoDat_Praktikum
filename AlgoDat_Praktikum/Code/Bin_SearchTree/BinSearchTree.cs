@@ -1,19 +1,15 @@
-﻿using System;
+﻿using AlgoDat_Praktikum.Code.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AlgoDat_Praktikum.Code.Interfaces;
-using AlgoDat_Praktikum.Code.abstrDataType;
 
-
-namespace AlgoDat_Praktikum.Code.LinkedList
+namespace AlgoDat_Praktikum.Code.Bin_SearchTree
 {
-    class MultiSetSortedLinkedList : List, IMultiSetSorted<int>
+    class BinSearchTree : ISetSorted<Node>
     {
-        //hier dürfen gleiche elemente mehrmals vorkommen und müssen sortiert sein
-
-        public (bool successfulInsert, int elemPos) SearchHelper { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public virtual (bool successfulInsert, Node elemPos) SearchHelper { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public bool delete(int elem)
         {
@@ -25,7 +21,7 @@ namespace AlgoDat_Praktikum.Code.LinkedList
             throw new NotImplementedException();
         }
 
-        public override void print()
+        public void print()
         {
             throw new NotImplementedException();
         }
@@ -34,5 +30,11 @@ namespace AlgoDat_Praktikum.Code.LinkedList
         {
             throw new NotImplementedException();
         }
+    }
+
+    class Node
+    {
+        Node parent, left, right;
+        int value;
     }
 }

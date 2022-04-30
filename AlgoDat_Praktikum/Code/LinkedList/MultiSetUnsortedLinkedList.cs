@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 using AlgoDat_Praktikum.Code.Interfaces;
 using AlgoDat_Praktikum.Code.abstrDataType;
 
-
 namespace AlgoDat_Praktikum.Code.LinkedList
 {
-    class MultiSetSortedLinkedList : List, IMultiSetSorted<int>
+    class MultiSetUnsortedLinkedList : List, IMultiSetUnsorted<int>
     {
-        //hier dürfen gleiche elemente mehrmals vorkommen und müssen sortiert sein
+        //hier dürfen gleiche Elemente  mehrmals vorkommen und müssen NICHT sortiert sein
 
         public (bool successfulInsert, int elemPos) SearchHelper { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public bool checkMultiSet(int elem)
+        {
+            throw new NotImplementedException();
+        }
 
         public bool delete(int elem)
         {

@@ -10,9 +10,13 @@ using AlgoDat_Praktikum.Code.Interfaces;
 
 namespace AlgoDat_Praktikum.Code.LinkedList
 {
-    class SetUnsortedLinkedList: Helper, ISetUnsorted
+    class SetUnsortedLinkedList : MultiSetUnsortedLinkedList, ISetUnsorted<int>
     {
         //hier dürfen gleiche elemente NICHT mehrmals vorkommen und müssen NICHT sortiert sein
 
+        public new bool search(int elem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

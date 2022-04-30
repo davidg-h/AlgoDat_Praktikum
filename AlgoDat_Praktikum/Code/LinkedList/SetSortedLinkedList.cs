@@ -9,10 +9,13 @@ using AlgoDat_Praktikum.Code.abstrDataType;
 
 namespace AlgoDat_Praktikum.Code.LinkedList
 {
-    class SetSortedLinkedList: Helper, ISetSorted
+    class SetSortedLinkedList : MultiSetSortedLinkedList, ISetSorted<int>
     {
         //hier dürfen gleiche elemente NICHT mehrmals vorkommen und müssen sortiert sein
 
-        
+        public new bool search(int elem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

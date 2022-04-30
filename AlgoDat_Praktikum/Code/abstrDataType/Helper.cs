@@ -3,7 +3,7 @@ using AlgoDat_Praktikum.Code.Interfaces;
 
 namespace AlgoDat_Praktikum.Code.abstrDataType
 {
-    abstract class Helper : IDictionary
+    public abstract class Helper : IDictionary
     {
         /// <summary>
         /// if elem was found successfulInsert => true and elemPos => index (where elem was found)
