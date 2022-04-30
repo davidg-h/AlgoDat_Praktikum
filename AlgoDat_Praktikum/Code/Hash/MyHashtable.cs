@@ -9,72 +9,107 @@ namespace AlgoDat_Praktikum.Code.Array
 {
     public class MyHashtable
     {
-        int size;
+        public int Size;
         int[] memory;
 
         public MyHashtable(int size){
-            this.size = size;
+            this.Size = findNextPrime(size);
             //TODO: set size to next prime
-            memory = new int[size];
+            memory = new int[Size];
             for (int i = 0; i < memory.Length; i++)
             {
                 memory[i] = -1;
             }
         }
+
         public bool search(int elem){
-            for (int i = 0; i < size; i++)
-            {
-                if(memory[i] == elem)
-                    return true;
-            }
-            return false;
+            int value = divisionRestMethode(elem);
+            if (value == -1)
+                return false;
+            return true;
         }  // true = gefunden
+
         public bool insert(int elem, int key = -1)
         {
             int i = 0;
-            while(i < size && memory[i] != -1 ) i++;
-            if(i == size) return false;
+            while(i < Size && memory[i] != -1 ) i++;
+            if(i == Size) return false;
             memory[i] = elem;
             return true;
         }
-        public bool insert2(int key,int elem){
-            int newKey = divisionRestMethode(key);
-            if(memory[newKey] == -1){
-                memory[newKey] = elem;
+
+        public bool insertSondierung(int key,int elem){
+            if(memory[key] == -1){
+                memory[key] = elem;
                 return true;
             }
             else{
                 int i = 1;
-                while(newKey-i >= 0 && memory[newKey-i] != -1) i++;
-                if(i < 0) {
-                    while(newKey+i <= size && memory[newKey+i] != -1) i++;
-                    if(i > 0) {
-                    while(newKey-i >= 0 && memory[newKey-i] != -1) i++;
+                while(key-i >= 0 && memory[key-i] != -1) i++;
+                if(key-i < 0) {
+                    i = 1;
+                    while(key+i <= Size && memory[key+i] != -1) i++;
+                    if(key + i > Size) {
+                        return false;
+                    }
+                    else{
+                        memory[key+i] = elem;
+                    }
                 }
                 else{
-                    memory[newKey-i] = elem;
+                    memory[key-i] = elem;
                 }
-                }
-                else{
-                    memory[newKey-i] = elem;
-                }
-                memory[i] = elem;
                 return true;
-
             }
+        }
+        public bool insert2(int key, int elem)
+        {
+            int newKey = divisionRestMethode(key);
+            return insertSondierung(newKey, elem);
+        }
+
+        public bool insertQuadratic(int key, int elem)
+        {
+            int newKey = divisionRestMethode((int)Math.Pow(key,2));
+            return insertSondierung(newKey, elem);
         }
 
         public bool delete(int elem){
+            int value = divisionRestMethode(elem);
+            if (value == -1)
+                return false;
+            memory[divisionRestMethode(elem)] = -1;
             return true;
         } // true = gelöscht
+
         public void print(){
-            for(int i=0;i<size;i++){
-               System.Console.WriteLine(i+": "+memory[i]);
+            for(int i=0;i<Size;i++){
+               Console.WriteLine(i+": "+memory[i]);
             }
         }
 
+        private int findNextPrime(int number)
+        {
+            bool isPrime = false;
+            int counter  = number;
+            while (!isPrime)
+            {
+                isPrime = true;
+                for (int i = 2; i < counter / 2; i++)
+                {
+                    if (counter % i == 0)
+                    {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                counter++;
+            }
+            return counter;
+        }
+
         private int divisionRestMethode(int k){
-	        return (k % size);
+	        return (k % Size);
         }
     }
 }
