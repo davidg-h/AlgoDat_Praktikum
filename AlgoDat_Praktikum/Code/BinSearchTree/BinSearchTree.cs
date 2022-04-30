@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AlgoDat_Praktikum.Code.abstrDataType;
 using AlgoDat_Praktikum.Code.Interfaces;
 
 
 namespace AlgoDat_Praktikum.Code.BinSearchTree
 {
+    // wird von List nicht mehr geerbt sondern nur noch vom Interface
     class BinSearchTree : List, ISetSorted
     {
         //Properties:
@@ -49,6 +49,7 @@ namespace AlgoDat_Praktikum.Code.BinSearchTree
                 parentNode.LeftNode = nodeToInsert;
                 return true;
             }
+            // hier wollte der fuhr das mit dem suchen haben wo die position geben wird falls der knoten nicht vorhanden ist -> damit nur einmal gesucht wird
             else // Value must already be in tree 
             {
                 return false;
