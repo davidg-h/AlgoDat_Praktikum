@@ -6,9 +6,9 @@
 
 Baum Spezifikationen:
 + print inorder (siehe Übung 5)
-++ top, down 90° gedreht
+  + top, down 90° gedreht
 + Referenzen:
-++ zum Parent Knoten
-++ auf links; auf rechts
-++ Wert
+  + zum Parent Knoten
+  + auf links; auf rechts
+  + Wert
 + bei suche: statt index den Elterknoten mir Richtung(left,right)
