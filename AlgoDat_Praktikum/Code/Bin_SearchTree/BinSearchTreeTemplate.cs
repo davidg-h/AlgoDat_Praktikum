@@ -1,5 +1,5 @@
 ﻿using AlgoDat_Praktikum.Code.Interfaces;
-using AlgoDat_Praktikum.Code.BinSearchTree;
+using AlgoDat_Praktikum.Code.Bin_SearchTree;
 using System;
 
 

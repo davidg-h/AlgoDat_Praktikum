@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AlgoDat_Praktikum.Code.Interfaces;
 
 
-namespace AlgoDat_Praktikum.Code.BinSearchTree
+namespace AlgoDat_Praktikum.Code.Bin_SearchTree
 {
     // wird von List nicht mehr geerbt sondern nur noch vom Interface -> das macht die ovveride obsolet
     class BinSearchTree : List, ISetSorted
@@ -172,3 +172,4 @@ namespace AlgoDat_Praktikum.Code.BinSearchTree
         }
     }
 }
+*/
