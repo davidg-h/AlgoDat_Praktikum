@@ -1,14 +1,13 @@
-﻿using System;
+﻿using AlgoDat_Praktikum.Code.Bin_SearchTree;
+using System;
 using System.Linq;
-using AlgoDat_Praktikum.Code.Bin_SearchTree;
 
 namespace AlgoDat_Praktikum.Code.Treap
 {
     class Treap : BinSearchTreeTemplate
     {
-        Node root;
+        NodeT root;
         Random rand = new Random();
-        int prio;
 
         public void userHandler()
         {
@@ -20,15 +19,15 @@ namespace AlgoDat_Praktikum.Code.Treap
             var userInput = Console.ReadLine();
         }
 
-        public void testRotate()
+        public void test()
         {
-            Node six = new Node(6, null, null, null);
-            Node drei = new Node(3, null, null, null);
-            Node zwei = new Node(2, null, null, null);
-            Node vier = new Node(4, null, null, null);
-            Node neun = new Node(9, null, null, null);
-            Node acht = new Node(8, null, null, null);
-            Node zehn = new Node(10, null, null, null);
+            NodeT six = new NodeT(6, null, null, null, 1);
+            NodeT drei = new NodeT(3, null, null, null, 2);
+            NodeT zwei = new NodeT(2, null, null, null, 3);
+            NodeT vier = new NodeT(4, null, null, null, 4);
+            NodeT neun = new NodeT(9, null, null, null, 5);
+            NodeT acht = new NodeT(8, null, null, null, 6);
+            NodeT zehn = new NodeT(10, null, null, null, 0);
 
             six.Left = drei;
             six.Right = neun;
@@ -57,16 +56,36 @@ namespace AlgoDat_Praktikum.Code.Treap
             Console.WriteLine("\n\n");
             Console.WriteLine("left rot um 9:");
             print(root);
+
+            sortTree(zehn);
+            Console.WriteLine("Sort Tree test:");
+            print(root);
+        }
+        
+        // after every node which is being added call sortTree on that node
+        private void sortTree(NodeT n)
+        {
+            NodeT parent = (NodeT)n.Parent;
+            while (parent != null && n.Prio < parent.Prio)
+            {
+                if (n.Value < parent.Value) rightRotOfNode(n);
+                else leftRotOfNode(n);
+                // new parent of n
+                parent = (NodeT)n.Parent;
+            }
         }
 
-        private void rightRotOfNode(Node n)
+        private void rightRotOfNode(NodeT n)
         {
-            Node oldRightOf_n = n.Right;
-            Node oldParentParentOf_n = n.Parent.Parent;
+            NodeT oldRightOf_n = (NodeT)n.Right;
+            NodeT oldParentParentOf_n = (NodeT)n.Parent.Parent;
             n.Right = n.Parent;
             n.Right.Parent = n;
             n.Right.Left = oldRightOf_n;
-            n.Right.Left.Parent = n.Right;
+            if (oldRightOf_n != null)
+            {
+                n.Right.Left.Parent = n.Right;
+            }
             n.Parent = oldParentParentOf_n;
             if (n.Parent != null)
             {
@@ -78,14 +97,17 @@ namespace AlgoDat_Praktikum.Code.Treap
             }
         }
 
-        private void leftRotOfNode(Node n)
+        private void leftRotOfNode(NodeT n)
         {
-            Node oldLeftOf_n = n.Left;
-            Node oldParentParentOf_n = n.Parent.Parent;
+            NodeT oldLeftOf_n = (NodeT)n.Left;
+            NodeT oldParentParentOf_n = (NodeT)n.Parent.Parent;
             n.Left = n.Parent;
             n.Left.Parent = n;
             n.Left.Right = oldLeftOf_n;
-            n.Left.Left.Parent = n.Right;
+            if (oldLeftOf_n != null)
+            {
+                n.Left.Right.Parent = n.Left;
+            }
             n.Parent = oldParentParentOf_n;
             if (n.Parent != null)
             {
@@ -97,24 +119,24 @@ namespace AlgoDat_Praktikum.Code.Treap
             }
         }
 
-        private void print(Node n, int lvl = 0)
+        private void print(NodeT n, int lvl = 0)
         {
             string tabs = "         ";
             if (n != null)
             {
-                print(n.Right, lvl + 1);
+                print((NodeT)n.Right, lvl + 1);
                 // einrückungen für die ausgabe
                 tabs = String.Concat(Enumerable.Repeat(tabs, lvl));
                 if (lvl != 0)
                 {
                     //Console.WriteLine(tabs + "height" + lvl + "\n");
-                    Console.WriteLine(tabs + " ---- " + n.Value + "\n");
+                    Console.WriteLine(tabs + " ---- " + $" ({n.Value},{n.Prio})" + "\n");
                 }
                 else
                 {
-                    Console.WriteLine("(r): " + n.Value);
+                    Console.WriteLine($"(r): ({n.Value},{n.Prio})");
                 }
-                print(n.Left, lvl + 1);
+                print((NodeT)n.Left, lvl + 1);
             }
         }
     }

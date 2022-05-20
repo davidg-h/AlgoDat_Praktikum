@@ -9,6 +9,9 @@ namespace AlgoDat_Praktikum
     {
         static void Main(string[] args)
         {
+            /*Treap t = new Treap();
+            t.test();*/
+
             Console.WriteLine("Wähle den abstrakten Datentypen aus:");
             Console.WriteLine("1. MultiSet unsorted");
             Console.WriteLine("2. Set unsorted");
@@ -29,17 +32,18 @@ namespace AlgoDat_Praktikum
                     break;
 
                 case "2":
-                    Console.WriteLine("a. Hashtable with quadratic probing"); 
-                    Console.WriteLine("b. Hashtable with seperate Chains"); 
+                    Console.WriteLine("a. Hashtable with quadratic probing");
+                    Console.WriteLine("b. Hashtable with seperate Chains");
                     Console.WriteLine("c. SetUnsorted Array");
                     Console.WriteLine("d. SetUnsorted LinkedList");
                     userInput = Console.ReadLine();
 
-                    switch(userInput){
-                        case "a": 
+                    switch (userInput)
+                    {
+                        case "a":
                             HashHandler.handleQuadProb();
                             break;
-                        case "b": 
+                        case "b":
                             HashHandler.handleSepChain();
                             break;
                     }
