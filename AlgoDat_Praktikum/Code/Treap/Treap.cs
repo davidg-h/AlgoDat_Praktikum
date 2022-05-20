@@ -61,7 +61,8 @@ namespace AlgoDat_Praktikum.Code.Treap
             Console.WriteLine("Sort Tree test:");
             print(root);
         }
-
+        
+        // after every node which is being added call sortTree on that node
         private void sortTree(NodeT n)
         {
             NodeT parent = (NodeT)n.Parent;
