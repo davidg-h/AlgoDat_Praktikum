@@ -7,7 +7,7 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
 {
     class BinSearchTreeTemplate : ISetSorted<Node>
     {
-        public virtual (bool successfulInsert, Node elemPos) SearchHelper { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public virtual Node SearchHelper { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public bool delete(int elem)
         {
