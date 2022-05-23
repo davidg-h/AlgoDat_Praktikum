@@ -11,7 +11,7 @@ namespace AlgoDat_Praktikum.Code.LinkedList
     {
         //hier dürfen gleiche Elemente  mehrmals vorkommen und müssen NICHT sortiert sein
 
-        public (bool successfulInsert, int elemPos) SearchHelper { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int SearchHelper { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public bool checkMultiSet(int elem)
         {

@@ -8,7 +8,6 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
 {
     public class Node
     {
-        //public Node parentNode { get; set; }
         public Node Left { get; set; }
         public Node Right { get; set; }
         public Node Parent { get; set; }

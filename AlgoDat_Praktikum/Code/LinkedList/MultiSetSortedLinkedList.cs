@@ -12,7 +12,7 @@ namespace AlgoDat_Praktikum.Code.LinkedList
     {
         //hier dürfen gleiche elemente mehrmals vorkommen und müssen sortiert sein
 
-        public (bool successfulInsert, int elemPos) SearchHelper { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int SearchHelper { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public bool delete(int elem)
         {

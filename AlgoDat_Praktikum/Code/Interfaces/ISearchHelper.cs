@@ -2,6 +2,6 @@
 {
     interface ISearchHelper<T> : IDictionary
     {
-        (bool successfulInsert, T elemPos) SearchHelper { get; set; }
+        T SearchHelper { get; set; }
     }
 }
