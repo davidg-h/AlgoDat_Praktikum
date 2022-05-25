@@ -9,7 +9,7 @@ namespace AlgoDat_Praktikum.Code.Array
         public int Size;
         //TODO: own Datatype for ArrayList
         List<int>[] memory;
-        public (bool successfulInsert, int elemPos) SearchHelper { get; set; }
+        public int SearchHelper { get; set; }
 
     
         public HashTabSepChain(int size){

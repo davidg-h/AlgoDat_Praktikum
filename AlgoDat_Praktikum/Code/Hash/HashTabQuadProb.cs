@@ -8,7 +8,7 @@ namespace AlgoDat_Praktikum.Code.Array
     {
         public int Size;
         int[] memory;
-        public (bool successfulInsert, int elemPos) SearchHelper { get; set; }
+        public int SearchHelper { get; set; }
         public HashTabQuadProb(int size){
             this.Size = size;
             memory = new int[Size];

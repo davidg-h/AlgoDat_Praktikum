@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,45 +8,45 @@ using AlgoDat_Praktikum.Code.Interfaces;
 
 namespace AlgoDat_Praktikum.Code.Bin_SearchTree
 {
-    // wird von List nicht mehr geerbt sondern nur noch vom Interface -> das macht die ovveride obsolet
-    class BinSearchTree : List, ISetSorted
+    class BinSearchTree : ISetSorted<Node>
     {
         //Properties:
         public Node TreeRoot { get; set; }
         Node currentNode = TreeRoot;
+        public (bool successfulInsert, Node elemPos) SearchHelper { get; set; }
         //Functions
-        public override bool insert(int elem)
+        public bool insert(int elem)
         {
             Node nodeToInsert = new Node(elem);
             Node parentNode = null;
-
             if (this.currentNode == null) // TreeRoot is null
             {
                 TreeRoot = nodeToInsert; //Given value is new root
                 return true;
             }
-            while (currentNode != null) //Go through the tree until you find the next avaiable leaf
-            {
-                if (currentNode.NodeValue > elem) // Given value is smaller then the Node value under scope
-                {
-                    parentNode = currentNode; //Saving information about parent node if following node might be null
-                    currentNode = currentNode.LeftNode; //traverse to the left 
-                }
-                else if (currentNode.NodeValue < elem)// Given value is smaller then the Node value under scope
-                {
-                    parentNode = currentNode;//Saving information about parent node if following node might be null
-                    currentNode = currentNode.RightNode;//traverse to the right;  
-                }
-            }
+            //while (currentNode != null) //Go through the tree until you find the next avaiable leaf
+            //{
+            //    if (currentNode.NodeValue > elem) // Given value is smaller then the Node value under scope
+            //    {
+            //        parentNode = currentNode; //Saving information about parent node if following node might be null
+            //        currentNode = currentNode.LeftNode; //traverse to the left 
+            //    }
+            //    else if (currentNode.NodeValue < elem)// Given value is smaller then the Node value under scope
+            //    {
+            //        parentNode = currentNode;//Saving information about parent node if following node might be null
+            //        currentNode = currentNode.RightNode;//traverse to the right;  
+            //    }
+            //}
             //Insertion of new leaf
-            if (parentNode.NodeValue < elem)
+            search(elem);
+            if (SearchHelper.elemPos.NodeValue < elem)
             {
-                parentNode.RightNode = nodeToInsert;
+                SearchHelper.elemPos..RightNode = nodeToInsert;
                 return true;
             }
-            else if (parentNode.NodeValue > elem)
+            else if (SearchHelper.elemPos.NodeValue > elem)
             {
-                parentNode.LeftNode = nodeToInsert;
+                SearchHelper.elemPos..LeftNode = nodeToInsert;
                 return true;
             }
             // hier wollte der fuhr das mit dem suchen haben wo die position geben wird falls der knoten nicht vorhanden ist -> damit nur einmal gesucht wird
@@ -56,16 +56,22 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
             }
         }
         // bei löschen muss auch zunächst gesucht werden hier wird das property searchHelper nützlich sein laut fuhr gleiches prinzip beim insert
-        public override bool delete(int elem)
+        public bool delete(int elem)
         {
             if (search(elem) == true)
             {
-                deleteNode(currentNode, elem);
+                if(SearchHelper.elemPos.LeftNode == elem)
+                {
+                    deleteNode(SearchHelper.elemPos.LeftNode, elem);
+                }else if(SearchHelper.elemPos.RightNode == elem)
+                {
+                    deleteNode(SearchHelper.elemPos.RightNode, elem);
+                }
+                
                 return true;
             }
             else
                 return false;
-            
         }
 
         static Node deleteNode(Node root, int elem)
@@ -124,7 +130,7 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
             }
         }
 
-        public override bool search(int elem)
+        public bool search(int elem)
         {
             if (TreeRoot == null)
             {
@@ -137,6 +143,7 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
         {
             if (nodeUnderScope.NodeValue == elem)
             {
+                SearchHelper.elemPos = nodeUnderScope;
                 return true; //Momentane Node hat den gesuchten Wert
             }
             else if (nodeUnderScope.NodeValue > elem && nodeUnderScope.LeftNode.NodeValue != null)
@@ -149,27 +156,30 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
             }
             else
             {
+                SearchHelper.elemPos = nodeUnderScope;
                 false;//Element nicht vorhanden in Baum
             }
         }//Hilfsfunktion für rekursivenaufruf
 
-        public override print()
+        private void print(Node n, int lvl = 0)
         {
-            InorderTraversal(TreeRoot);
-        }
-
-        void InorderTraversal(Node root)
-        {
-            if (root == null)
+            string tabs = "         ";
+            if (n != null)
             {
-                return;
+                print(n.Right, lvl + 1);
+                // einrückungen für die ausgabe
+                tabs = String.Concat(Enumerable.Repeat(tabs, lvl));
+                if (lvl != 0)
+                {
+                    //Console.WriteLine(tabs + "height" + lvl + "\n");
+                    Console.WriteLine(tabs + " ---- " + $" ({n.Value})" + "\n");
+                }
+                else
+                {
+                    Console.WriteLine($"(r): ({n.Value})");
+                }
+                print((NodeT)n.Left, lvl + 1);
             }
-
-            InorderTraversal(root.LeftNode);
-            System.Console.WriteLine(root.NodeValue + " ");
-            InorderTraversal(root.RightNode);
-
         }
     }
 }
-*/
