@@ -2,7 +2,7 @@
 using System;
 
 
-namespace AlgoDat_Praktikum.Code.Array
+namespace AlgoDat_Praktikum.Code.Hash
 {
     public class HashTabQuadProb: HashHelper, ISetUnsorted<int> 
     {

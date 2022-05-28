@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
-using AlgoDat_Praktikum.Code.Array;
 using AlgoDat_Praktikum.Code.Treap;
+using AlgoDat_Praktikum.Code.Bin_SearchTree;
+using AlgoDat_Praktikum.Code.Hash;
+using AlgoDat_Praktikum.Code.LinkedList;
 
 namespace AlgoDat_Praktikum
 {
@@ -9,9 +11,6 @@ namespace AlgoDat_Praktikum
     {
         static void Main(string[] args)
         {
-            /*Treap t = new Treap();
-            t.test();*/
-
             Console.WriteLine("Wähle den abstrakten Datentypen aus:");
             Console.WriteLine("1. MultiSet unsorted");
             Console.WriteLine("2. Set unsorted");
@@ -20,19 +19,19 @@ namespace AlgoDat_Praktikum
 
             string userInput = Console.ReadLine();
 
-            Console.WriteLine("Wähle den konkreten Datentyp aus");
+            Console.WriteLine("\nWähle den konkreten Datentyp aus");
             switch (userInput)
             {
                 case "1":
                     // TODO: let your class handle the console inputs and error handling (only not negative numbers)
                     // for more legible code in the main after user enters a concrete data type (s.r.: example)
                     Console.WriteLine("a. MultiSetUnsorted Array");
-                    Console.WriteLine("c. MultiSetUnsorted LinkedList");
+                    Console.WriteLine("b. MultiSetUnsorted LinkedList");
                     userInput = Console.ReadLine();
                     break;
 
                 case "2":
-                    Console.WriteLine("a. Hashtable with quadratic probing");
+                    Console.WriteLine("\na. Hashtable with quadratic probing");
                     Console.WriteLine("b. Hashtable with seperate Chains");
                     Console.WriteLine("c. SetUnsorted Array");
                     Console.WriteLine("d. SetUnsorted LinkedList");
@@ -50,41 +49,35 @@ namespace AlgoDat_Praktikum
                     break;
 
                 case "3":
-                    Console.WriteLine("a. MultiSetSorted Array");
+                    Console.WriteLine("\na. MultiSetSorted Array");
                     Console.WriteLine("b. MultiSetSorted LinkedList");
                     userInput = Console.ReadLine();
                     break;
 
                 case "4":
-                    Console.WriteLine("a. BinSearchTree");
+                    Console.WriteLine("\na. BinSearchTree");
                     Console.WriteLine("b. Treap");
                     Console.WriteLine("c. AVLTree");
                     Console.WriteLine("d. SetSorted Array");
                     Console.WriteLine("e. SetSorted LinkedList");
                     userInput = Console.ReadLine();
+                    switch (userInput)
+                    {
+                        case "a":
+                            break;
+                        case "b":
+                            Treap t = new Treap();
+                            t.userHandler();
+                            break;
+                        case "c":
+                            break;
+                        case "d":
+                            break;
+                        case "e":
+                            break;
+                    }
                     break;
             }
         }
     }
 }
-/*
- * example:
- * 
- * class MyClass {
- * 
- *  void userHandling() {
- *       Console.WriteLine("Sie haben array ausgewählt");
- *       Console.WriteLine("Max. Länge sind (zum Beispiel) 5 Zahlen");
- *       Console.WriteLine("1.einfügen");
- *       Console.WriteLine("2.Löschen");
- *       Console.WriteLine("...");
- *       ....
- *  }
- * }
- * 
- * only code in main should be: 
- * if (userInput == "a") {
- *  Myclass example = new MyClass();
- *  example.userHandling();
- * }
- */

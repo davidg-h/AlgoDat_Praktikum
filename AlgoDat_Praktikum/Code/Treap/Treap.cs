@@ -4,81 +4,117 @@ using System.Linq;
 
 namespace AlgoDat_Praktikum.Code.Treap
 {
-    class Treap : BinSearchTreeTemplate
+    class Treap : BinSearchTree
     {
-        NodeT root;
-        Random rand = new Random();
-
         public void userHandler()
         {
-            Console.WriteLine("Du hast einen Treap ausgewählt!");
-            Console.WriteLine("1.Suche eine Zahl");
-            Console.WriteLine("2.Füge eine Zahl hinzu");
-            Console.WriteLine("3.Lösche eine Zahl");
-            Console.WriteLine("4.Ausgabe des Treaps");
-            var userInput = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("\n\nDu hast einen Treap ausgewählt!");
+                Console.WriteLine("1.Suche eine Zahl");
+                Console.WriteLine("2.Füge eine/mehrere Zahl/en hinzu");
+                Console.WriteLine("3.Lösche eine Zahl");
+                Console.WriteLine("4.Ausgabe des Treaps");
+                var userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case "1":
+                        Console.WriteLine("\nWelche Zahl möchstest du suchen?");
+                        if (search(Convert.ToInt32(Console.ReadLine()))) { Console.WriteLine($"Deine Zahl wurde gefunden und kommt nach {SearchHelper.Parent.Value}\n\n"); print(); }
+                        else { Console.WriteLine("Leerer Treap/Zahl nicht im Treap! Schaue nochmal die Ausgabe an\n\n"); print(); }
+                        break;
+                    case "2":
+                        Console.WriteLine("\nFalls du mehrere Zahlen hinzufügen möchstest schreibe sie in diesem Format auf: 2,3,4,5,6,...");
+                        var arr = Array.ConvertAll(Console.ReadLine().Trim().Split(','), Convert.ToInt32);
+                        foreach (int elem in arr)
+                        {
+                            insert(elem);
+                        }
+                        Console.WriteLine("\nDein Treap:\n\n");
+                        print();
+                        break;
+                    case "3":
+                        Console.WriteLine("\nWelche Zahl möchstest du löschen?:");
+                        if (delete(Convert.ToInt32(Console.ReadLine()))) { Console.WriteLine("Deine Zahl wurde gelöscht. Dein neuer Treap:\n\n"); print(); }
+                        else { Console.WriteLine("Die Zahl gibt es nicht. Schaue am besten nochmal nach\n\n"); print(); }
+                        break;
+                    case "4":
+                    default:
+                        Console.WriteLine("\nAusgabe des Treaps:\n\n");
+                        print();
+                        break;
+                }
+                Console.WriteLine("\n\nDrücke Esc um zu beenden");
+            } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
 
-        public void test()
+        #region Public Methods
+        public override bool insert(int elem)
         {
-            NodeT six = new NodeT(6, null, null, null, 1);
-            NodeT drei = new NodeT(3, null, null, null, 2);
-            NodeT zwei = new NodeT(2, null, null, null, 3);
-            NodeT vier = new NodeT(4, null, null, null, 4);
-            NodeT neun = new NodeT(9, null, null, null, 5);
-            NodeT acht = new NodeT(8, null, null, null, 6);
-            NodeT zehn = new NodeT(10, null, null, null, 0);
-
-            six.Left = drei;
-            six.Right = neun;
-
-            drei.Parent = six;
-            drei.Left = zwei;
-            drei.Right = vier;
-
-            zwei.Parent = drei;
-            vier.Parent = drei;
-
-            neun.Parent = six;
-            neun.Left = acht;
-            neun.Right = zehn;
-
-            acht.Parent = neun;
-            zehn.Parent = neun;
-            root = six;
-            Console.WriteLine("Standtard:");
-            print(root);
-            rightRotOfNode(drei);
-            Console.WriteLine("\n\n");
-            Console.WriteLine("rechts rot um 3:");
-            print(root);
-            leftRotOfNode(neun);
-            Console.WriteLine("\n\n");
-            Console.WriteLine("left rot um 9:");
-            print(root);
-
-            sortTree(zehn);
-            Console.WriteLine("Sort Tree test:");
-            print(root);
+            bool sucessfullInsert = base.insert(elem);
+            // after every insert treap should be sorted depending on its node prio
+            sortTree(LastInsert);
+            return sucessfullInsert;
         }
-        
+        /// <summary>
+        /// rotate the node with the elem until it is a child node and deletes it
+        /// </summary>
+        /// <param name="elem"></param>
+        /// <returns></returns>
+        public new bool delete(int elem)
+        {
+            if (search(elem))
+            {
+                Node n = SearchHelper;
+                while (n.Left != null || n.Right != null)
+                {
+                    // 101 is an out of range prio for child nodes that are null
+                    int prioLeft = n.Left != null ? n.Left.Prio : 101;
+                    int prioRight = n.Right != null ? n.Right.Prio : 101;
+                    if (prioRight < prioLeft)
+                    {
+                        leftRotOfNode(n.Right);
+                    }
+                    else
+                    {
+                        rightRotOfNode(n.Left);
+                    }
+                }
+                // deletes the node
+                _ = n.Parent.Value < n.Value ? n.Parent.Right = null : n.Parent.Left = null;
+                return true;
+            }
+            return false;
+        }
+
+        public override void print()
+        {
+            printTreap(TreeRoot);
+        }
+        #endregion
+
+        #region helper functions
         // after every node which is being added call sortTree on that node
-        private void sortTree(NodeT n)
+        private void sortTree(Node n)
         {
-            NodeT parent = (NodeT)n.Parent;
-            while (parent != null && n.Prio < parent.Prio)
+            Node parent = n.Parent;
+            while (parent != null && n.Prio <= parent.Prio)
             {
                 if (n.Value < parent.Value) rightRotOfNode(n);
                 else leftRotOfNode(n);
                 // new parent of n
-                parent = (NodeT)n.Parent;
+                parent = n.Parent;
             }
         }
-
-        private void rightRotOfNode(NodeT n)
+        /// <summary>
+        /// right rotate of Node n
+        /// </summary>
+        /// <param name="n"></param>
+        private void rightRotOfNode(Node n)
         {
-            NodeT oldRightOf_n = (NodeT)n.Right;
-            NodeT oldParentParentOf_n = (NodeT)n.Parent.Parent;
+            Node oldRightOf_n = n.Right;
+            Node oldParentParentOf_n = n.Parent.Parent;
             n.Right = n.Parent;
             n.Right.Parent = n;
             n.Right.Left = oldRightOf_n;
@@ -93,14 +129,17 @@ namespace AlgoDat_Praktikum.Code.Treap
             }
             else
             {
-                root = n;
+                TreeRoot = n;
             }
         }
-
-        private void leftRotOfNode(NodeT n)
+        /// <summary>
+        /// left rotate of Node n
+        /// </summary>
+        /// <param name="n"></param>
+        private void leftRotOfNode(Node n)
         {
-            NodeT oldLeftOf_n = (NodeT)n.Left;
-            NodeT oldParentParentOf_n = (NodeT)n.Parent.Parent;
+            Node oldLeftOf_n = n.Left;
+            Node oldParentParentOf_n = n.Parent.Parent;
             n.Left = n.Parent;
             n.Left.Parent = n;
             n.Left.Right = oldLeftOf_n;
@@ -115,16 +154,16 @@ namespace AlgoDat_Praktikum.Code.Treap
             }
             else
             {
-                root = n;
+                TreeRoot = n;
             }
         }
 
-        private void print(NodeT n, int lvl = 0)
+        private void printTreap(Node n, int lvl = 0)
         {
             string tabs = "         ";
             if (n != null)
             {
-                print((NodeT)n.Right, lvl + 1);
+                printTreap(n.Right, lvl + 1);
                 // einrückungen für die ausgabe
                 tabs = String.Concat(Enumerable.Repeat(tabs, lvl));
                 if (lvl != 0)
@@ -134,10 +173,11 @@ namespace AlgoDat_Praktikum.Code.Treap
                 }
                 else
                 {
-                    Console.WriteLine($"(r): ({n.Value},{n.Prio})");
+                    Console.WriteLine($"(r): ({n.Value},{n.Prio})\n");
                 }
-                print((NodeT)n.Left, lvl + 1);
+                printTreap(n.Left, lvl + 1);
             }
         }
+        #endregion
     }
 }
