@@ -11,6 +11,12 @@ namespace AlgoDat_Praktikum
     {
         static void Main(string[] args)
         {
+            /*BinSearchTree b = new BinSearchTree();
+            b.testBintree();*/
+
+            /*Treap t = new Treap();
+            t.testTreap();*/
+
             Console.WriteLine("Wähle den abstrakten Datentypen aus:");
             Console.WriteLine("1. MultiSet unsorted");
             Console.WriteLine("2. Set unsorted");

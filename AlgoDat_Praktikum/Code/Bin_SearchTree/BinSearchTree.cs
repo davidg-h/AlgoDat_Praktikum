@@ -94,6 +94,11 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
 
         private int deleteNode(Node n)
         {
+            if (n == null)
+            {
+                n = SearchHelper;
+            }
+
             if (n.Right != null)
             {
                 return deleteNode(n.Right);
@@ -105,12 +110,12 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
                 {
                     Node parentOfn = n.Parent;
                     n = n.Left;
-                    parentOfn.Left = n;
+                    parentOfn.Right = n;
                     n.Parent = parentOfn;
                 }
                 else
                 {
-                    n.Parent.Right = null;
+                    _ = n.Parent.Value < n.Value ? n.Parent.Right = null : n.Parent.Left = null;
                 }
                 return symmPredecessor;
             }
@@ -221,7 +226,7 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
                 }
                 else
                 {
-                    Console.WriteLine($"(r): ({n.Value})");
+                    Console.WriteLine($"\n\n\n(r): ({n.Value})\n\n\n");
                 }
                 printTree(n.Left, lvl + 1);
             }
@@ -229,26 +234,57 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
 
         public void testBintree()
         {
-            insert(6);
-            insert(3);
-            insert(9);
+            insert(45);
+            insert(18);
             insert(10);
-            insert(8);
-            insert(3);
-            insert(2);
-            insert(4);
-            insert(1);
+            insert(41);
+            insert(43);
+            insert(67);
+            insert(56);
+            insert(97);
+            insert(95);
+            insert(66);
+            insert(59);
+            insert(57);
+            insert(64);
+            //insert(45); // test gelicher knoten nochmal eingefügt
             print();
 
-            if (search(3)) Console.WriteLine("3 da\n\n");
-            else Console.WriteLine("3 nicht da");
+            if (search(64)) Console.WriteLine("64 da\n\n");
+            else Console.WriteLine("64 nicht da");
+            Console.WriteLine("------------------------------------------------------\n\n");
 
-            if (delete(3)) print();
+           /* if (delete(64)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+            insert(64);
+
+            if (delete(41)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+
+            if (delete(97)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+            insert(41);
+            insert(97);*/
+
+            Console.WriteLine("Löschen 2 Nachfolger\n");
+            if (delete(18)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+
+            if (delete(67)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+
+            Console.WriteLine("Löschen einer Zahl nicht im Baum:\n");
+            if (delete(999)) print();
             else Console.WriteLine("Keine solche Zahl vorhanden");
 
-            Console.WriteLine("Löschen der Root:\n");
-            if (delete(6)) print();
-            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("3 einfügen");
+            insert(3);
+            print();
         }
     }
 }
