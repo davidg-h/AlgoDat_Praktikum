@@ -2,7 +2,7 @@ using AlgoDat_Praktikum.Code.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace AlgoDat_Praktikum.Code.Array
+namespace AlgoDat_Praktikum.Code.Hash
 {
     public class HashTabSepChain: HashHelper, ISetUnsorted<int> {
         

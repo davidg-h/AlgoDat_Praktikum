@@ -1,7 +1,7 @@
 ﻿using AlgoDat_Praktikum.Code.Interfaces;
 using System;
 
-namespace AlgoDat_Praktikum.Code.Array
+namespace AlgoDat_Praktikum.Code.Hash
 {
     public static class HashHandler
     {

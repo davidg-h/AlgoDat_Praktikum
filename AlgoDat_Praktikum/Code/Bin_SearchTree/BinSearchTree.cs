@@ -11,17 +11,17 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
     class BinSearchTree : ISetSorted<Node>
     {
         //Properties:
+        public Node SearchHelper { get; set; }
         public Node TreeRoot { get; set; }
-        Node currentNode = TreeRoot;
-        public (bool successfulInsert, Node elemPos) SearchHelper { get; set; }
+        internal Node LastInsert { get; set; }
         //Functions
-        public bool insert(int elem)
+        public virtual bool insert(int elem)
         {
-            Node nodeToInsert = new Node(elem);
-            Node parentNode = null;
-            if (this.currentNode == null) // TreeRoot is null
+            Node nodeToInsert = new Node(elem, null, null, null, new Random().Next(101));
+            if (TreeRoot == null) // TreeRoot is null
             {
                 TreeRoot = nodeToInsert; //Given value is new root
+                LastInsert = TreeRoot;
                 return true;
             }
             //while (currentNode != null) //Go through the tree until you find the next avaiable leaf
@@ -38,45 +38,89 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
             //    }
             //}
             //Insertion of new leaf
-            search(elem);
-            if (SearchHelper.elemPos.NodeValue < elem)
+            if (!search(elem))
             {
-                SearchHelper.elemPos..RightNode = nodeToInsert;
-                return true;
-            }
-            else if (SearchHelper.elemPos.NodeValue > elem)
-            {
-                SearchHelper.elemPos..LeftNode = nodeToInsert;
-                return true;
+                if (SearchHelper.Value < elem)
+                {
+                    SearchHelper.Right = nodeToInsert;
+                    nodeToInsert.Parent = SearchHelper;
+                    LastInsert = nodeToInsert;
+                    return true;
+                }
+                else if (SearchHelper.Value > elem)
+                {
+                    SearchHelper.Left = nodeToInsert;
+                    nodeToInsert.Parent = SearchHelper;
+                    LastInsert = nodeToInsert;
+                    return true;
+                }
             }
             // hier wollte der fuhr das mit dem suchen haben wo die position geben wird falls der knoten nicht vorhanden ist -> damit nur einmal gesucht wird
-            else // Value must already be in tree 
-            {
-                return false;
-            }
+            // Value must already be in tree 
+            Console.WriteLine("Zahl schon vorhanden");
+            return false;
         }
         // bei löschen muss auch zunächst gesucht werden hier wird das property searchHelper nützlich sein laut fuhr gleiches prinzip beim insert
         public bool delete(int elem)
         {
             if (search(elem) == true)
             {
-                if(SearchHelper.elemPos.LeftNode == elem)
+                /*  if (SearchHelper.elemPos.LeftNode == elem)
+                  {
+                      deleteNode(SearchHelper.elemPos.LeftNode, elem);
+                  }
+                  else if (SearchHelper.elemPos.RightNode == elem)
+                  {
+                      deleteNode(SearchHelper.elemPos.RightNode, elem);
+                  }*/
+
+                // löschen eines blattes
+                if (SearchHelper.Left == null && SearchHelper.Right == null)
                 {
-                    deleteNode(SearchHelper.elemPos.LeftNode, elem);
-                }else if(SearchHelper.elemPos.RightNode == elem)
-                {
-                    deleteNode(SearchHelper.elemPos.RightNode, elem);
+                    _ = SearchHelper.Value > SearchHelper.Parent.Value ? SearchHelper.Parent.Right = null : SearchHelper.Parent.Left = null;
                 }
-                
+                else
+                {
+                    SearchHelper.Value = deleteNode(SearchHelper.Left);
+                }
+
                 return true;
             }
             else
+            {
                 return false;
+            }
         }
 
-        static Node deleteNode(Node root, int elem)
+        private int deleteNode(Node n)
         {
-            //tree is empty
+            if (n == null)
+            {
+                n = SearchHelper;
+            }
+
+            if (n.Right != null)
+            {
+                return deleteNode(n.Right);
+            }
+            else
+            {
+                int symmPredecessor = n.Value;
+                if (n.Left != null)
+                {
+                    Node parentOfn = n.Parent;
+                    n = n.Left;
+                    parentOfn.Right = n;
+                    n.Parent = parentOfn;
+                }
+                else
+                {
+                    _ = n.Parent.Value < n.Value ? n.Parent.Right = null : n.Parent.Left = null;
+                }
+                return symmPredecessor;
+            }
+
+            /*//tree is empty
             if (root == null)
             {
                 return root;
@@ -94,7 +138,7 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
                 return root;
             }
 
-            if(root.LeftNode == null)
+            if (root.LeftNode == null)
             {
                 Node child = root.RightNode;
                 return child;
@@ -110,7 +154,7 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
 
                 Node prev = root.RightNode;
 
-                while(prev.LeftNode != null)
+                while (prev.LeftNode != null)
                 {
                     prevParent = prev;
                     prev = prev.LeftNode;
@@ -127,7 +171,7 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
 
                 root.NodeValue = prev.NodeValue;
                 return root;
-            }
+            }*/
         }
 
         public bool search(int elem)
@@ -139,34 +183,40 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
             return binarySearch(TreeRoot, elem);
         }
 
+        //Hilfsfunktion für rekursivenaufruf
         bool binarySearch(Node nodeUnderScope, int elem)
         {
-            if (nodeUnderScope.NodeValue == elem)
+            if (nodeUnderScope.Value == elem)
             {
-                SearchHelper.elemPos = nodeUnderScope;
+                SearchHelper = nodeUnderScope;
                 return true; //Momentane Node hat den gesuchten Wert
             }
-            else if (nodeUnderScope.NodeValue > elem && nodeUnderScope.LeftNode.NodeValue != null)
+            else if (nodeUnderScope.Value > elem && nodeUnderScope.Left != null)
             {
-                binarySearch(nodeUnderScope.LeftNode, elem); //Gesuchter Wert ist kleiner als aktueller NodeWert
+                return binarySearch(nodeUnderScope.Left, elem); //Gesuchter Wert ist kleiner als aktueller NodeWert
             }
-            else if (elem > nodeUnderScope && nodeUnderScope.RightNode.NodeValue != null)
+            else if (elem > nodeUnderScope.Value && nodeUnderScope.Right != null)
             {
-                binarySearch(nodeUnderScope.RightNode, elem);//Gesuchter Wert ist größer als aktueller NodeWert
+                return binarySearch(nodeUnderScope.Right, elem);//Gesuchter Wert ist größer als aktueller NodeWert
             }
             else
             {
-                SearchHelper.elemPos = nodeUnderScope;
-                false;//Element nicht vorhanden in Baum
+                SearchHelper = nodeUnderScope; //neuer Knoten müsste hinter diesen kommen; nodeUnderScope ist blatt
+                return false;//Element nicht vorhanden in Baum
             }
-        }//Hilfsfunktion für rekursivenaufruf
+        }
 
-        private void print(Node n, int lvl = 0)
+        public virtual void print()
+        {
+            printTree(TreeRoot);
+        }
+
+        private void printTree(Node n, int lvl = 0)
         {
             string tabs = "         ";
             if (n != null)
             {
-                print(n.Right, lvl + 1);
+                printTree(n.Right, lvl + 1);
                 // einrückungen für die ausgabe
                 tabs = String.Concat(Enumerable.Repeat(tabs, lvl));
                 if (lvl != 0)
@@ -176,10 +226,65 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
                 }
                 else
                 {
-                    Console.WriteLine($"(r): ({n.Value})");
+                    Console.WriteLine($"\n\n\n(r): ({n.Value})\n\n\n");
                 }
-                print((NodeT)n.Left, lvl + 1);
+                printTree(n.Left, lvl + 1);
             }
+        }
+
+        public void testBintree()
+        {
+            insert(45);
+            insert(18);
+            insert(10);
+            insert(41);
+            insert(43);
+            insert(67);
+            insert(56);
+            insert(97);
+            insert(95);
+            insert(66);
+            insert(59);
+            insert(57);
+            insert(64);
+            //insert(45); // test gelicher knoten nochmal eingefügt
+            print();
+
+            if (search(64)) Console.WriteLine("64 da\n\n");
+            else Console.WriteLine("64 nicht da");
+            Console.WriteLine("------------------------------------------------------\n\n");
+
+           /* if (delete(64)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+            insert(64);
+
+            if (delete(41)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+
+            if (delete(97)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+            insert(41);
+            insert(97);*/
+
+            Console.WriteLine("Löschen 2 Nachfolger\n");
+            if (delete(18)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+
+            if (delete(67)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+
+            Console.WriteLine("Löschen einer Zahl nicht im Baum:\n");
+            if (delete(999)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+
+            Console.WriteLine("3 einfügen");
+            insert(3);
+            print();
         }
     }
 }
