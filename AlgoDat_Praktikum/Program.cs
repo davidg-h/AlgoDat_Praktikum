@@ -70,6 +70,8 @@ namespace AlgoDat_Praktikum
                     switch (userInput)
                     {
                         case "a":
+                            BinSearchTree bst = new BinSearchTree();
+                            bst.userHandler();
                             break;
                         case "b":
                             Treap t = new Treap();
