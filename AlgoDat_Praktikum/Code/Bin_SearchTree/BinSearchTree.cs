@@ -14,9 +14,55 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
         public Node SearchHelper { get; set; }
         public Node TreeRoot { get; set; }
         internal Node LastInsert { get; set; }
-        //Functions
+
+        public void userHandler()
+        {
+            do
+            {
+                Console.WriteLine("\n\nDu hast einen BinarySearchTree ausgewählt!");
+                Console.WriteLine("1.Suche eine Zahl");
+                Console.WriteLine("2.Füge eine/mehrere Zahl/en hinzu");
+                Console.WriteLine("3.Lösche eine Zahl");
+                Console.WriteLine("4.Ausgabe des BinarySearchTrees");
+                var userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case "1":
+                        Console.WriteLine("\nWelche Zahl möchstest du suchen?");
+                        if (search(Convert.ToInt32(Console.ReadLine()))) { Console.WriteLine($"Deine Zahl wurde gefunden und kommt nach {SearchHelper.Parent.Value}\n\n"); print(); }
+                        else { Console.WriteLine("Leerer BinarySearchTree/Zahl nicht im BinarySearchTree! Schaue nochmal die Ausgabe an\n\n"); print(); }
+                        break;
+                    case "2":
+                        Console.WriteLine("\nFalls du mehrere Zahlen hinzufügen möchstest schreibe sie in diesem Format auf: 2,3,4,5,6,...");
+                        var arr = Array.ConvertAll(Console.ReadLine().Trim().Split(','), Convert.ToInt32);
+                        foreach (int elem in arr)
+                        {
+                            insert(elem);
+                        }
+                        Console.WriteLine("\nDein BinarySearchTree:\n\n");
+                        print();
+                        break;
+                    case "3":
+                        Console.WriteLine("\nWelche Zahl möchstest du löschen?:");
+                        if (delete(Convert.ToInt32(Console.ReadLine()))) { Console.WriteLine("Deine Zahl wurde gelöscht. Dein neuer BinarySearchTree:\n\n"); print(); }
+                        else { Console.WriteLine("Die Zahl gibt es nicht. Schaue am besten nochmal nach\n\n"); print(); }
+                        break;
+                    case "4":
+                    default:
+                        Console.WriteLine("\nAusgabe des BinarySearchTree:\n\n");
+                        print();
+                        break;
+                }
+                Console.WriteLine("\n\nDrücke Esc um zu beenden");
+            } while (Console.ReadKey().Key != ConsoleKey.Escape);
+        }
+
+        #region PublicFunctions
         public virtual bool insert(int elem)
         {
+
+
             Node nodeToInsert = new Node(elem, null, null, null, new Random().Next(101));
             if (TreeRoot == null) // TreeRoot is null
             {
@@ -24,19 +70,6 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
                 LastInsert = TreeRoot;
                 return true;
             }
-            //while (currentNode != null) //Go through the tree until you find the next avaiable leaf
-            //{
-            //    if (currentNode.NodeValue > elem) // Given value is smaller then the Node value under scope
-            //    {
-            //        parentNode = currentNode; //Saving information about parent node if following node might be null
-            //        currentNode = currentNode.LeftNode; //traverse to the left 
-            //    }
-            //    else if (currentNode.NodeValue < elem)// Given value is smaller then the Node value under scope
-            //    {
-            //        parentNode = currentNode;//Saving information about parent node if following node might be null
-            //        currentNode = currentNode.RightNode;//traverse to the right;  
-            //    }
-            //}
             //Insertion of new leaf
             if (!search(elem))
             {
@@ -63,36 +96,182 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
         // bei löschen muss auch zunächst gesucht werden hier wird das property searchHelper nützlich sein laut fuhr gleiches prinzip beim insert
         public bool delete(int elem)
         {
+            Node temp_b = null;
+            Node temp_c = null;
             if (search(elem) == true)
             {
-                /*  if (SearchHelper.elemPos.LeftNode == elem)
-                  {
-                      deleteNode(SearchHelper.elemPos.LeftNode, elem);
-                  }
-                  else if (SearchHelper.elemPos.RightNode == elem)
-                  {
-                      deleteNode(SearchHelper.elemPos.RightNode, elem);
-                  }*/
-
                 // löschen eines blattes
                 if (SearchHelper.Left == null && SearchHelper.Right == null)
                 {
                     _ = SearchHelper.Value > SearchHelper.Parent.Value ? SearchHelper.Parent.Right = null : SearchHelper.Parent.Left = null;
                 }
-                else
+                //Löschen mit Kind Rechts
+                else if (SearchHelper.Left == null)
                 {
-                    SearchHelper.Value = deleteNode(SearchHelper.Left);
+                    SearchHelper.Value = SearchHelper.Right.Value;
+                    SearchHelper.Right = null;
+                    //Löschen mit Kind Links
+                }
+                else if (SearchHelper.Right == null)
+                {
+                    SearchHelper.Value = SearchHelper.Left.Value;
+                    SearchHelper.Left = null;
+                }
+                //löschen mit mehreren Kindern 
+                else if (SearchHelper.Left != null && SearchHelper.Right != null)
+                {
+                    temp_b = SearchHelper;
+                    if (temp_b.Left.Right != null) //Bedingung dafür dass im Baum ein größerer Wert Vorhanden ist der verschoben werden muss
+                    {
+                        temp_b = temp_b.Left;
+                        while (temp_b.Right.Right != null)//Annähern an den größtmöglichen Nachfolger der zu löschenden Zahl
+                        {
+                            temp_b = temp_b.Right;
+                        }
+                    }
+                    if (temp_b == SearchHelper)//Hochbewegen des linken Teilbaums
+                    {
+                        temp_c = temp_b.Left;
+                        temp_b.Left = temp_c.Left;
+                    }
+                    else //Hochbewegen des rechten Teilbaums
+                    {
+                        temp_c = temp_b.Right;
+                        temp_b.Right = temp_c.Left;
+                    }
+                    SearchHelper.Value = temp_c.Value;
                 }
 
                 return true;
             }
             else
             {
+                Console.WriteLine("Zahl nicht vorhanden, kann nicht gelöscht werden.");
                 return false;
             }
         }
+        public bool search(int elem)
+        {
+            if (TreeRoot == null)
+            {
+                return false;//Keine Elemente im Baum -> Wert kann nicht vorkommen 
+            }
+            return binarySearch(TreeRoot, elem);
+        }
 
-        private int deleteNode(Node n)
+        public virtual void print()
+        {
+            printTree(TreeRoot);
+        }
+
+        #endregion
+
+        #region HelperFunctions
+
+        //Hilfsfunktion für rekursivenaufruf
+        bool binarySearch(Node nodeUnderScope, int elem)
+        {
+            if (nodeUnderScope.Value == elem)
+            {
+                SearchHelper = nodeUnderScope; //wenn gefunden gebe den Knoten zurück
+                return true; //Momentane Node hat den gesuchten Wert
+            }
+            else if (nodeUnderScope.Value > elem && nodeUnderScope.Left != null)
+            {
+                return binarySearch(nodeUnderScope.Left, elem); //Gesuchter Wert ist kleiner als aktueller NodeWert
+            }
+            else if (elem > nodeUnderScope.Value && nodeUnderScope.Right != null)
+            {
+                return binarySearch(nodeUnderScope.Right, elem);//Gesuchter Wert ist größer als aktueller NodeWert
+            }
+            else
+            {
+                SearchHelper = nodeUnderScope; //neuer Knoten müsste hinter diesen kommen; nodeUnderScope ist blatt
+                return false;//Element nicht vorhanden in Baum
+            }
+        }
+
+        private void printTree(Node n, int lvl = 0)
+        {
+            string tabs = "         ";
+            if (n != null)
+            {
+                printTree(n.Right, lvl + 1);
+                // einrückungen für die ausgabe
+                tabs = String.Concat(Enumerable.Repeat(tabs, lvl));
+                if (lvl != 0)
+                {
+                    //Console.WriteLine(tabs + "height" + lvl + "\n");
+                    Console.WriteLine(tabs + " ---- " + $" ({n.Value})" + "\n");
+                }
+                else
+                {
+                    Console.WriteLine($"\n\n\n(r): ({n.Value})\n\n\n");
+                }
+                printTree(n.Left, lvl + 1);
+            }
+        }
+        #endregion
+
+
+
+        public void testBintree()
+        {
+            /*insert(45);
+            insert(18);
+            insert(10);
+            insert(41);
+            insert(43);
+            insert(68);
+            insert(56);
+            insert(97);
+            insert(95);
+            insert(66);
+            insert(59);
+            insert(57);
+            insert(64);
+            //insert(45); // test gelicher knoten nochmal eingefügt
+            print();
+
+            if (search(64)) Console.WriteLine("64 da\n\n");
+            else Console.WriteLine("64 nicht da");
+            Console.WriteLine("------------------------------------------------------\n\n");
+
+            if (delete(64)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+            insert(64);
+
+            if (delete(41)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+
+            if (delete(97)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+            insert(41);
+            insert(97);
+
+            Console.WriteLine("Löschen 2 Nachfolger\n");
+            insert(2);
+            //insert(15);
+            if (delete(18)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+            insert(67);
+            if (delete(68)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+
+            Console.WriteLine("Löschen einer Zahl nicht im Baum:\n");
+            if (delete(999)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+
+            Console.WriteLine("3 einfügen");
+            insert(3);
+            print();*/
+        }
+      /*  private int deleteNode(Node n)
         {
             if (n == null)
             {
@@ -119,172 +298,6 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
                 }
                 return symmPredecessor;
             }
-
-            /*//tree is empty
-            if (root == null)
-            {
-                return root;
-            }
-
-            //Recursive call until root is Nodevalue to be deleted
-            if (root.NodeValue > elem)
-            {
-                root.LeftNode = deleteNode(root.LeftNode, elem);
-                return root;
-            }
-            else if (root.NodeValue < elem)
-            {
-                root.RightNode = deleteNode(root.RightNode, elem);
-                return root;
-            }
-
-            if (root.LeftNode == null)
-            {
-                Node child = root.RightNode;
-                return child;
-            }
-            else if (root.RightNode == null)
-            {
-                Node child = root.LeftNode;
-                return child;
-            }
-            else
-            {
-                Node prevParent = root;
-
-                Node prev = root.RightNode;
-
-                while (prev.LeftNode != null)
-                {
-                    prevParent = prev;
-                    prev = prev.LeftNode;
-                }
-
-                if (prevParent != root)
-                {
-                    prevParent.LeftNode = prev.RightNode;
-                }
-                else
-                {
-                    prevParent.RightNode = prev.RightNode;
-                }
-
-                root.NodeValue = prev.NodeValue;
-                return root;
-            }*/
-        }
-
-        public bool search(int elem)
-        {
-            if (TreeRoot == null)
-            {
-                return false;//Keine Elemente im Baum -> Wert kann nicht vorkommen 
-            }
-            return binarySearch(TreeRoot, elem);
-        }
-
-        //Hilfsfunktion für rekursivenaufruf
-        bool binarySearch(Node nodeUnderScope, int elem)
-        {
-            if (nodeUnderScope.Value == elem)
-            {
-                SearchHelper = nodeUnderScope;
-                return true; //Momentane Node hat den gesuchten Wert
-            }
-            else if (nodeUnderScope.Value > elem && nodeUnderScope.Left != null)
-            {
-                return binarySearch(nodeUnderScope.Left, elem); //Gesuchter Wert ist kleiner als aktueller NodeWert
-            }
-            else if (elem > nodeUnderScope.Value && nodeUnderScope.Right != null)
-            {
-                return binarySearch(nodeUnderScope.Right, elem);//Gesuchter Wert ist größer als aktueller NodeWert
-            }
-            else
-            {
-                SearchHelper = nodeUnderScope; //neuer Knoten müsste hinter diesen kommen; nodeUnderScope ist blatt
-                return false;//Element nicht vorhanden in Baum
-            }
-        }
-
-        public virtual void print()
-        {
-            printTree(TreeRoot);
-        }
-
-        private void printTree(Node n, int lvl = 0)
-        {
-            string tabs = "         ";
-            if (n != null)
-            {
-                printTree(n.Right, lvl + 1);
-                // einrückungen für die ausgabe
-                tabs = String.Concat(Enumerable.Repeat(tabs, lvl));
-                if (lvl != 0)
-                {
-                    //Console.WriteLine(tabs + "height" + lvl + "\n");
-                    Console.WriteLine(tabs + " ---- " + $" ({n.Value})" + "\n");
-                }
-                else
-                {
-                    Console.WriteLine($"\n\n\n(r): ({n.Value})\n\n\n");
-                }
-                printTree(n.Left, lvl + 1);
-            }
-        }
-
-        public void testBintree()
-        {
-            insert(45);
-            insert(18);
-            insert(10);
-            insert(41);
-            insert(43);
-            insert(67);
-            insert(56);
-            insert(97);
-            insert(95);
-            insert(66);
-            insert(59);
-            insert(57);
-            insert(64);
-            //insert(45); // test gelicher knoten nochmal eingefügt
-            print();
-
-            if (search(64)) Console.WriteLine("64 da\n\n");
-            else Console.WriteLine("64 nicht da");
-            Console.WriteLine("------------------------------------------------------\n\n");
-
-           /* if (delete(64)) print();
-            else Console.WriteLine("Keine solche Zahl vorhanden");
-            Console.WriteLine("------------------------------------------------------\n\n");
-            insert(64);
-
-            if (delete(41)) print();
-            else Console.WriteLine("Keine solche Zahl vorhanden");
-            Console.WriteLine("------------------------------------------------------\n\n");
-
-            if (delete(97)) print();
-            else Console.WriteLine("Keine solche Zahl vorhanden");
-            Console.WriteLine("------------------------------------------------------\n\n");
-            insert(41);
-            insert(97);*/
-
-            Console.WriteLine("Löschen 2 Nachfolger\n");
-            if (delete(18)) print();
-            else Console.WriteLine("Keine solche Zahl vorhanden");
-            Console.WriteLine("------------------------------------------------------\n\n");
-
-            if (delete(67)) print();
-            else Console.WriteLine("Keine solche Zahl vorhanden");
-            Console.WriteLine("------------------------------------------------------\n\n");
-
-            Console.WriteLine("Löschen einer Zahl nicht im Baum:\n");
-            if (delete(999)) print();
-            else Console.WriteLine("Keine solche Zahl vorhanden");
-
-            Console.WriteLine("3 einfügen");
-            insert(3);
-            print();
-        }
+        }*/
     }
 }
