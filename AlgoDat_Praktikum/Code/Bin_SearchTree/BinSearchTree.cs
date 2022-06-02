@@ -146,7 +146,7 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
             }
             else
             {
-                Console.WriteLine("Zahl nicht vorhande, kann nicht gelöscht werden.");
+                Console.WriteLine("Zahl nicht vorhanden, kann nicht gelöscht werden.");
                 return false;
             }
         }
@@ -167,41 +167,13 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
         #endregion
 
         #region HelperFunctions
-        private int deleteNode(Node n)
-        {
-            if (n == null)
-            {
-                n = SearchHelper;
-            }
-
-            if (n.Right != null)
-            {
-                return deleteNode(n.Right);
-            }
-            else
-            {
-                int symmPredecessor = n.Value;
-                if (n.Left != null)
-                {
-                    Node parentOfn = n.Parent;
-                    n = n.Left;
-                    parentOfn.Right = n;
-                    n.Parent = parentOfn;
-                }
-                else
-                {
-                    _ = n.Parent.Value < n.Value ? n.Parent.Right = null : n.Parent.Left = null;
-                }
-                return symmPredecessor;
-            }
-        }
 
         //Hilfsfunktion für rekursivenaufruf
         bool binarySearch(Node nodeUnderScope, int elem)
         {
             if (nodeUnderScope.Value == elem)
             {
-                SearchHelper = nodeUnderScope;
+                SearchHelper = nodeUnderScope; //wenn gefunden gebe den Knoten zurück
                 return true; //Momentane Node hat den gesuchten Wert
             }
             else if (nodeUnderScope.Value > elem && nodeUnderScope.Left != null)
@@ -243,59 +215,89 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
 
 
 
-        //public void testBintree()
-        //{
-        //    insert(45);
-        //    insert(18);
-        //    insert(10);
-        //    insert(41);
-        //    insert(43);
-        //    insert(67);
-        //    insert(56);
-        //    insert(97);
-        //    insert(95);
-        //    insert(66);
-        //    insert(59);
-        //    insert(57);
-        //    insert(64);
-        //    //insert(45); // test gelicher knoten nochmal eingefügt
-        //    print();
+        public void testBintree()
+        {
+            /*insert(45);
+            insert(18);
+            insert(10);
+            insert(41);
+            insert(43);
+            insert(68);
+            insert(56);
+            insert(97);
+            insert(95);
+            insert(66);
+            insert(59);
+            insert(57);
+            insert(64);
+            //insert(45); // test gelicher knoten nochmal eingefügt
+            print();
 
-        //    if (search(64)) Console.WriteLine("64 da\n\n");
-        //    else Console.WriteLine("64 nicht da");
-        //    Console.WriteLine("------------------------------------------------------\n\n");
+            if (search(64)) Console.WriteLine("64 da\n\n");
+            else Console.WriteLine("64 nicht da");
+            Console.WriteLine("------------------------------------------------------\n\n");
 
-        //   /* if (delete(64)) print();
-        //    else Console.WriteLine("Keine solche Zahl vorhanden");
-        //    Console.WriteLine("------------------------------------------------------\n\n");
-        //    insert(64);
+            if (delete(64)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+            insert(64);
 
-        //    if (delete(41)) print();
-        //    else Console.WriteLine("Keine solche Zahl vorhanden");
-        //    Console.WriteLine("------------------------------------------------------\n\n");
+            if (delete(41)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
 
-        //    if (delete(97)) print();
-        //    else Console.WriteLine("Keine solche Zahl vorhanden");
-        //    Console.WriteLine("------------------------------------------------------\n\n");
-        //    insert(41);
-        //    insert(97);*/
+            if (delete(97)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+            insert(41);
+            insert(97);
 
-        //    Console.WriteLine("Löschen 2 Nachfolger\n");
-        //    if (delete(18)) print();
-        //    else Console.WriteLine("Keine solche Zahl vorhanden");
-        //    Console.WriteLine("------------------------------------------------------\n\n");
+            Console.WriteLine("Löschen 2 Nachfolger\n");
+            insert(2);
+            //insert(15);
+            if (delete(18)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
+            insert(67);
+            if (delete(68)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("------------------------------------------------------\n\n");
 
-        //    if (delete(67)) print();
-        //    else Console.WriteLine("Keine solche Zahl vorhanden");
-        //    Console.WriteLine("------------------------------------------------------\n\n");
+            Console.WriteLine("Löschen einer Zahl nicht im Baum:\n");
+            if (delete(999)) print();
+            else Console.WriteLine("Keine solche Zahl vorhanden");
 
-        //    Console.WriteLine("Löschen einer Zahl nicht im Baum:\n");
-        //    if (delete(999)) print();
-        //    else Console.WriteLine("Keine solche Zahl vorhanden");
+            Console.WriteLine("3 einfügen");
+            insert(3);
+            print();*/
+        }
+      /*  private int deleteNode(Node n)
+        {
+            if (n == null)
+            {
+                n = SearchHelper;
+            }
 
-        //    Console.WriteLine("3 einfügen");
-        //    insert(3);
-        //    print();
-        //}
+            if (n.Right != null)
+            {
+                return deleteNode(n.Right);
+            }
+            else
+            {
+                int symmPredecessor = n.Value;
+                if (n.Left != null)
+                {
+                    Node parentOfn = n.Parent;
+                    n = n.Left;
+                    parentOfn.Right = n;
+                    n.Parent = parentOfn;
+                }
+                else
+                {
+                    _ = n.Parent.Value < n.Value ? n.Parent.Right = null : n.Parent.Left = null;
+                }
+                return symmPredecessor;
+            }
+        }*/
     }
 }

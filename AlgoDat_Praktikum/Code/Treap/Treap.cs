@@ -6,7 +6,7 @@ namespace AlgoDat_Praktikum.Code.Treap
 {
     class Treap : BinSearchTree
     {
-        public void userHandler()
+        public new void userHandler()
         {
             do
             {
@@ -52,18 +52,13 @@ namespace AlgoDat_Praktikum.Code.Treap
         public void testTreap()
         {
             insert(45);
-            insert(18);
-            insert(10);
-            insert(41);
-            insert(43);
-            insert(67);
-            insert(56);
-            insert(97);
-            insert(95);
-            insert(66);
-            insert(59);
-            insert(57);
-            insert(64);
+            insert(18); print();
+            insert(67); print();
+            insert(10); print();
+            insert(22); print();
+            insert(90); print();
+            insert(20); print();
+            insert(56); 
             //insert(45); // test gelicher knoten nochmal eingefügt
             print();
 
@@ -71,27 +66,20 @@ namespace AlgoDat_Praktikum.Code.Treap
             else Console.WriteLine("64 nicht da");
             Console.WriteLine("------------------------------------------------------\n\n");
 
-            if (delete(64)) print();
-            else Console.WriteLine("Keine solche Zahl vorhanden");
-            Console.WriteLine("------------------------------------------------------\n\n");
-            insert(64);
-
-            if (delete(41)) print();
-            else Console.WriteLine("Keine solche Zahl vorhanden");
+            if (search(67)) Console.WriteLine("67 da\n\n");
+            else Console.WriteLine("67 nicht da");
             Console.WriteLine("------------------------------------------------------\n\n");
 
-            if (delete(97)) print();
+            if (delete(90)) print();
             else Console.WriteLine("Keine solche Zahl vorhanden");
             Console.WriteLine("------------------------------------------------------\n\n");
-            insert(41);
-            insert(97);
+            insert(90);
 
-            Console.WriteLine("Löschen 2 Nachfolger\n");
-            if (delete(18)) print();
+            if (delete(10)) print();
             else Console.WriteLine("Keine solche Zahl vorhanden");
             Console.WriteLine("------------------------------------------------------\n\n");
 
-            if (delete(67)) print();
+            if (delete(45)) print();
             else Console.WriteLine("Keine solche Zahl vorhanden");
             Console.WriteLine("------------------------------------------------------\n\n");
 
