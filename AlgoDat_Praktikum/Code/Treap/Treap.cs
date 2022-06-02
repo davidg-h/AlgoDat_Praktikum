@@ -154,7 +154,7 @@ namespace AlgoDat_Praktikum.Code.Treap
         private void sortTree(Node n)
         {
             Node parent = n.Parent;
-            while (parent != null && n.Prio <= parent.Prio)
+            while (parent != null && n.Prio < parent.Prio)
             {
                 if (n.Value < parent.Value) rightRotOfNode(n);
                 else leftRotOfNode(n);
