@@ -72,17 +72,15 @@ namespace AlgoDat_Praktikum.Code.AVLTree
         }
         public new bool delete(int elem)
         {
-            bool sucessfullDelete = base.insert(elem);
-            base.delete(elem);
+            bool sucessfullDelete = base.delete(elem);
             //after every delete the balance factor need to be set and checked
-            if(search(elem))
+            if(sucessfullDelete)
             {
             BalanceFactorParent(SearchHelper);
             CheckBalanceFactor(SearchHelper);
-            }
             return true;
-            else
-                return false;
+            }
+            else return false;
 
         }
         #endregion
