@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using AlgoDat_Praktikum.Code.AVLTree;
 using AlgoDat_Praktikum.Code.Treap;
 using AlgoDat_Praktikum.Code.Bin_SearchTree;
 using AlgoDat_Praktikum.Code.Hash;
@@ -78,6 +79,8 @@ namespace AlgoDat_Praktikum
                             t.userHandler();
                             break;
                         case "c":
+                            AVL avl = new AVL();
+                            avl.userHandler();
                             break;
                         case "d":
                             break;

@@ -14,14 +14,16 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
 
         public int Value { get; set; }
         public int Prio { get; set; }
+        public int Balance { get; set; }
 
-        public Node(int value, Node left, Node right, Node parent, int prio = -1)
+        public Node(int value, Node left, Node right, Node parent, int prio = -1, int balance = 0)
         {
             Value = value;
             Left = left;
             Right = right;
             Parent = parent;
             Prio = prio;
+            Balance = balance;
         }
     }
 }

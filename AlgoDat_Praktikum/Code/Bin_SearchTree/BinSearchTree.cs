@@ -62,7 +62,6 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
         public virtual bool insert(int elem)
         {
 
-
             Node nodeToInsert = new Node(elem, null, null, null, new Random().Next(101));
             if (TreeRoot == null) // TreeRoot is null
             {
@@ -73,8 +72,10 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
             //Insertion of new leaf
             if (!search(elem))
             {
+                Node BalanceParent = SearchHelper.Parent;
                 if (SearchHelper.Value < elem)
                 {
+                    //changing every Balancefactor
                     SearchHelper.Right = nodeToInsert;
                     nodeToInsert.Parent = SearchHelper;
                     LastInsert = nodeToInsert;
@@ -92,6 +93,29 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
             // Value must already be in tree 
             Console.WriteLine("Zahl schon vorhanden");
             return false;
+        }
+
+        public virtual bool binarySearch(Node nodeUnderScope, int elem)
+        {
+            
+            if (nodeUnderScope.Value == elem)
+            {
+                SearchHelper = nodeUnderScope; //wenn gefunden gebe den Knoten zurück
+                return true; //Momentane Node hat den gesuchten Wert
+            }
+            else if (nodeUnderScope.Value > elem && nodeUnderScope.Left != null)
+            {
+                return binarySearch(nodeUnderScope.Left, elem);//Gesuchter Wert ist kleiner als aktueller NodeWert
+            }
+            else if (elem > nodeUnderScope.Value && nodeUnderScope.Right != null)
+            {
+                return binarySearch(nodeUnderScope.Right, elem);//Gesuchter Wert ist größer als aktueller NodeWert
+            }
+            else
+            {
+                SearchHelper = nodeUnderScope; //neuer Knoten müsste hinter diesen kommen; nodeUnderScope ist blatt
+                return false;//Element nicht vorhanden in Baum
+            }
         }
         // bei löschen muss auch zunächst gesucht werden hier wird das property searchHelper nützlich sein laut fuhr gleiches prinzip beim insert
         public bool delete(int elem)
@@ -169,27 +193,7 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
         #region HelperFunctions
 
         //Hilfsfunktion für rekursivenaufruf
-        bool binarySearch(Node nodeUnderScope, int elem)
-        {
-            if (nodeUnderScope.Value == elem)
-            {
-                SearchHelper = nodeUnderScope; //wenn gefunden gebe den Knoten zurück
-                return true; //Momentane Node hat den gesuchten Wert
-            }
-            else if (nodeUnderScope.Value > elem && nodeUnderScope.Left != null)
-            {
-                return binarySearch(nodeUnderScope.Left, elem); //Gesuchter Wert ist kleiner als aktueller NodeWert
-            }
-            else if (elem > nodeUnderScope.Value && nodeUnderScope.Right != null)
-            {
-                return binarySearch(nodeUnderScope.Right, elem);//Gesuchter Wert ist größer als aktueller NodeWert
-            }
-            else
-            {
-                SearchHelper = nodeUnderScope; //neuer Knoten müsste hinter diesen kommen; nodeUnderScope ist blatt
-                return false;//Element nicht vorhanden in Baum
-            }
-        }
+
 
         private void printTree(Node n, int lvl = 0)
         {
@@ -271,33 +275,33 @@ namespace AlgoDat_Praktikum.Code.Bin_SearchTree
             insert(3);
             print();*/
         }
-      /*  private int deleteNode(Node n)
-        {
-            if (n == null)
-            {
-                n = SearchHelper;
-            }
+        /*  private int deleteNode(Node n)
+          {
+              if (n == null)
+              {
+                  n = SearchHelper;
+              }
 
-            if (n.Right != null)
-            {
-                return deleteNode(n.Right);
-            }
-            else
-            {
-                int symmPredecessor = n.Value;
-                if (n.Left != null)
-                {
-                    Node parentOfn = n.Parent;
-                    n = n.Left;
-                    parentOfn.Right = n;
-                    n.Parent = parentOfn;
-                }
-                else
-                {
-                    _ = n.Parent.Value < n.Value ? n.Parent.Right = null : n.Parent.Left = null;
-                }
-                return symmPredecessor;
-            }
-        }*/
+              if (n.Right != null)
+              {
+                  return deleteNode(n.Right);
+              }
+              else
+              {
+                  int symmPredecessor = n.Value;
+                  if (n.Left != null)
+                  {
+                      Node parentOfn = n.Parent;
+                      n = n.Left;
+                      parentOfn.Right = n;
+                      n.Parent = parentOfn;
+                  }
+                  else
+                  {
+                      _ = n.Parent.Value < n.Value ? n.Parent.Right = null : n.Parent.Left = null;
+                  }
+                  return symmPredecessor;
+              }
+          }*/
     }
 }
