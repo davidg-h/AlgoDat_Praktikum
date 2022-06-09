@@ -45,7 +45,8 @@ namespace AlgoDat_Praktikum.Code.AVLTree
 
                                 Console.WriteLine("Deine Zahl wurde gelöscht. Dein neuer AVL:\n\n"); print();
                         }
-
+                        else
+                        Console.WriteLine("Deine Zahl konnte nicht gelöscht werden.")
                         break;
                     case "4":
                     default:
@@ -71,11 +72,17 @@ namespace AlgoDat_Praktikum.Code.AVLTree
         }
         public new bool delete(int elem)
         {
+            bool sucessfullDelete = base.insert(elem);
             base.delete(elem);
             //after every delete the balance factor need to be set and checked
+            if(search(elem))
+            {
             BalanceFactorParent(SearchHelper);
             CheckBalanceFactor(SearchHelper);
+            }
             return true;
+            else
+                return false;
 
         }
         #endregion
