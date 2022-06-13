@@ -15,8 +15,8 @@ namespace AlgoDat_Praktikum
             /*BinSearchTree b = new BinSearchTree();
             b.testBintree();*/
 
-           /* Treap treap = new Treap();
-            treap.testTreap();*/
+            /* Treap treap = new Treap();
+             treap.testTreap();*/
 
             Console.WriteLine("Wähle den abstrakten Datentypen aus:");
             Console.WriteLine("1. MultiSet unsorted");
@@ -35,6 +35,16 @@ namespace AlgoDat_Praktikum
                     Console.WriteLine("a. MultiSetUnsorted Array");
                     Console.WriteLine("b. MultiSetUnsorted LinkedList");
                     userInput = Console.ReadLine();
+                    switch (userInput)
+                    {
+                        case "a":
+                            break;
+                        case "b":
+                            MultiSetUnsortedLinkedList multiSetUnsortedLinkedList = new MultiSetUnsortedLinkedList();
+                            multiSetUnsortedLinkedList.MultiSetUnsortedHandler();
+                            break;
+
+                    }
                     break;
 
                 case "2":
@@ -52,6 +62,10 @@ namespace AlgoDat_Praktikum
                         case "b":
                             HashHandler.handleSepChain();
                             break;
+                        case "d":
+                            SetUnsortedLinkedList setUnsortedLinkedList = new SetUnsortedLinkedList();
+                            setUnsortedLinkedList.SetUnsortedHandler();
+                            break;
                     }
                     break;
 
@@ -59,6 +73,16 @@ namespace AlgoDat_Praktikum
                     Console.WriteLine("\na. MultiSetSorted Array");
                     Console.WriteLine("b. MultiSetSorted LinkedList");
                     userInput = Console.ReadLine();
+                    switch (userInput)
+                    {
+                        case "a":
+                            break;
+                        case "b":
+                            MultiSetSortedLinkedList multiSetSortedLinkedList = new MultiSetSortedLinkedList();
+                            multiSetSortedLinkedList.MultiSetSortedHandler();
+                            break;
+
+                    }
                     break;
 
                 case "4":
@@ -85,6 +109,8 @@ namespace AlgoDat_Praktikum
                         case "d":
                             break;
                         case "e":
+                            SetSortedLinkedList setSortedLinkedList = new SetSortedLinkedList();
+                            setSortedLinkedList.SetSortedHandler();
                             break;
                     }
                     break;

@@ -43,10 +43,10 @@ namespace AlgoDat_Praktikum.Code.AVLTree
                         {
                             Console.WriteLine("");
 
-                                Console.WriteLine("Deine Zahl wurde gelöscht. Dein neuer AVL:\n\n"); print();
+                            Console.WriteLine("Deine Zahl wurde gelöscht. Dein neuer AVL:\n\n"); print();
                         }
                         else
-                        Console.WriteLine("Deine Zahl konnte nicht gelöscht werden.")
+                            Console.WriteLine("Deine Zahl konnte nicht gelöscht werden.");
                         break;
                     case "4":
                     default:
