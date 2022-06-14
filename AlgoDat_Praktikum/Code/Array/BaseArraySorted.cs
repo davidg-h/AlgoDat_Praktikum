@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AlgoDat_Praktikum.Code.Interfaces;
 
-namespace AlgoDat_Praktikum.Code.Array
+namespace AlgoDat_Praktikum.Code.Array_
 {
     abstract class BaseArraySorted : BaseArray, IMultiSetSorted<int>
     {
