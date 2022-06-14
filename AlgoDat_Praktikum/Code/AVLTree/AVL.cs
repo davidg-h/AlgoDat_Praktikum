@@ -74,11 +74,11 @@ namespace AlgoDat_Praktikum.Code.AVLTree
         {
             bool sucessfullDelete = base.delete(elem);
             //after every delete the balance factor need to be set and checked
-            if(sucessfullDelete)
+            if (sucessfullDelete)
             {
-            BalanceFactorParent(SearchHelper);
-            CheckBalanceFactor(SearchHelper);
-            return true;
+                BalanceFactorParent(SearchHelper);
+                CheckBalanceFactor(SearchHelper);
+                return true;
             }
             else return false;
 
@@ -87,40 +87,45 @@ namespace AlgoDat_Praktikum.Code.AVLTree
 
         #region balancefactor check/set
         //checks the balancefactor of every Node 
-        private bool CheckBalanceFactor(Node NodeUnderScope)
+        private bool CheckBalanceFactor(Node nodeUnderScope)
         {
             //check for double-rotation or a single rotation is needed
-            if (NodeUnderScope.Balance >= 2)
+            if (nodeUnderScope.Balance >= 2)
             {
-                if (NodeUnderScope.Left.Balance >= 0)
+                //set the BF of the left Node because it could be outdated 
+                if (nodeUnderScope.Left != null)
+                    SetBalanceFactor(nodeUnderScope.Left);
+                if (nodeUnderScope.Left.Balance >= 0)
                 {
-                    rightRotOfNode(NodeUnderScope.Left);
+                    rightRotOfNode(nodeUnderScope.Left);
                 }
                 else
                 {
                     //double left-right rotation
-                    leftRotOfNode(NodeUnderScope.Left.Right);
-                    rightRotOfNode(NodeUnderScope.Left);
+                    leftRotOfNode(nodeUnderScope.Left.Right);
+                    rightRotOfNode(nodeUnderScope.Left);
                 }
             }
 
-            if (NodeUnderScope.Balance <= -2)
+            if (nodeUnderScope.Balance <= -2)
             {
-                if (NodeUnderScope.Right.Balance <= 0)
+                if (nodeUnderScope.Right != null)
+                    SetBalanceFactor(nodeUnderScope.Right);
+                if (nodeUnderScope.Right.Balance <= 0)
                 {
-                    leftRotOfNode(NodeUnderScope.Right);
+                    leftRotOfNode(nodeUnderScope.Right);
                 }
 
                 else
                 {
-                    leftRotOfNode(NodeUnderScope.Left.Right);
-                    rightRotOfNode(NodeUnderScope.Left);
+                    rightRotOfNode(nodeUnderScope.Right.Left);
+                    leftRotOfNode(nodeUnderScope.Right);
                 }
             }
             //start with parent and keep checking the parent Nodes because only they are still important after rotation
-            if (NodeUnderScope.Parent != null)
+            if (nodeUnderScope.Parent != null)
             {
-                    CheckBalanceFactor(NodeUnderScope.Parent);
+                CheckBalanceFactor(nodeUnderScope.Parent);
             }
             return true;
         }
@@ -144,11 +149,6 @@ namespace AlgoDat_Praktikum.Code.AVLTree
             {
                 TreeRoot = n;
             }
-            if (n.Parent != null)
-            {
-                BalanceFactorParent(n.Parent);
-                CheckBalanceFactor(n.Parent);
-            }
         }
         public void leftRotOfNode(Node n)
         {
@@ -170,57 +170,53 @@ namespace AlgoDat_Praktikum.Code.AVLTree
             {
                 TreeRoot = n;
             }
-            if (n.Parent != null)
-            {
-                BalanceFactorParent(n.Parent);
-                CheckBalanceFactor(n.Parent);
-            }
         }
 
-        //sets the BalanceFactor of every single Node in Tree
-        private void BalanceFactorParent(Node NodeUnderScope)
+        //sets the BalanceFactor of every Parent Node in Tree (because if you insert or delete a Node only its Parent Nodes can change their BF)
+        //but for some cases its important to update some BF of Node from the oder side!!!!
+        private void BalanceFactorParent(Node nodeUnderScope)
         {
-            SetBalanceFactor(NodeUnderScope);
+            SetBalanceFactor(nodeUnderScope);
             //count the balancefactor starting with the searchHelper Node where a Node was inserted or deleted and work up to the treeroot
-            if (NodeUnderScope.Parent != null)
-                BalanceFactorParent(NodeUnderScope.Parent);
+            if (nodeUnderScope.Parent != null)
+                BalanceFactorParent(nodeUnderScope.Parent);
         }
 
         //helper class of PreOrderSetBF
-        private void SetBalanceFactor(Node NodeUnderScope)
+        private void SetBalanceFactor(Node nodeUnderScope)
         {
-            NodeUnderScope.Balance = 0;
+            nodeUnderScope.Balance = 0;
             int lengthLeft = 0;
             int maxLeft = 0;
             int maxRight = 0;
 
             //if the node is a leaf set the BF to 0
-            if (NodeUnderScope.Left == null && NodeUnderScope.Right == null)
-                NodeUnderScope.Balance = 0;
+            if (nodeUnderScope.Left == null && nodeUnderScope.Right == null)
+                nodeUnderScope.Balance = 0;
             else
             {
-                LengthOfSide(ref maxLeft, ref maxRight, ref lengthLeft, NodeUnderScope);
-                NodeUnderScope.Balance = maxLeft - maxRight;
+                LengthOfSide(ref maxLeft, ref maxRight, ref lengthLeft, nodeUnderScope);
+                nodeUnderScope.Balance = maxLeft - maxRight;
             }
         }
         #endregion
 
         #region Node Length Methods
         //checks the length of each sides of a Node
-        private void LengthOfSide(ref int maxLeft, ref int maxRight, ref int length, Node NodeUnderScope)
+        private void LengthOfSide(ref int maxLeft, ref int maxRight, ref int length, Node nodeUnderScope)
         {
 
             //first check which side will be looked at so that the lenght counter doesnt mix them up
-            if (NodeUnderScope.Left != null)
+            if (nodeUnderScope.Left != null)
             {
                 length++;
-                LengthOfSideHelper(ref maxLeft, ref length, NodeUnderScope.Left); 
+                LengthOfSideHelper(ref maxLeft, ref length, nodeUnderScope.Left);
             }
             length = 0;
-            if (NodeUnderScope.Right != null)
+            if (nodeUnderScope.Right != null)
             {
                 length++;
-                LengthOfSideHelper(ref maxRight, ref length, NodeUnderScope.Right);
+                LengthOfSideHelper(ref maxRight, ref length, nodeUnderScope.Right);
             }
         }
 
