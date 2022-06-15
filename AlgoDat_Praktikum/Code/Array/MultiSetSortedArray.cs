@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlgoDat_Praktikum.Code.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AlgoDat_Praktikum.Code.Array_
 {
-    class MultiSetSortedArray : BaseArraySorted
+    class MultiSetSortedArray : BaseArraySorted, IMultiSetSorted<int>
     {
         public MultiSetSortedArray(int size) : base(size) { }
 

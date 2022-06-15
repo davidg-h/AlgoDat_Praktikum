@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AlgoDat_Praktikum.Code.Array_.BaseArray" Collapsed="true">
+    <Position X="3.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAgAAAACAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Code\Array\BaseArray.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.Array_.BaseArraySorted" Collapsed="true">
+    <Position X="1.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAgAAQAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Code\Array\BaseArraySorted.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.Array_.BaseArrayUnsorted" Collapsed="true">
+    <Position X="6.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAgAAQAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Code\Array\BaseArrayUnsorted.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.Array_.MultiSetSortedArray" Collapsed="true">
+    <Position X="0.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\Array\MultiSetSortedArray.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.Array_.MultiSetUnsortedArray" Collapsed="true">
+    <Position X="5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\Array\MultiSetUnsortedArray.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.Array_.SetSortedArray" Collapsed="true">
+    <Position X="2.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\Array\SetSortedArray.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.Array_.SetUnsortedArray" Collapsed="true">
+    <Position X="7.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\Array\SetUnsortedArray.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.AVLTree.AVL" Collapsed="true">
+    <Position X="11.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAIABUAAAAAAAAASAAAAAAQAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Code\AVLTree\AVL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.Bin_SearchTree.BinSearchTree" Collapsed="true">
+    <Position X="12.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAABAIAECAAgAAQAAAAAAAABAACAAAAAAAIA=</HashCode>
+      <FileName>Code\Bin_SearchTree\BinSearchTree.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.Hash.HashTabQuadProb" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAABAgAAAAAgAAQAAAAEAAAAgACAAAAIAAAA=</HashCode>
+      <FileName>Code\Hash\HashTabQuadProb.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.Hash.HashTabSepChain" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAABAgAAAAAgAAQAAAAAAAAAAACAAAAIAAAA=</HashCode>
+      <FileName>Code\Hash\HashTabSepChain.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.LinkedList.List" Collapsed="true">
+    <Position X="3.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAAgAAAACAAAAgBAQAAAAAAMAAAACAAAAAAAAA=</HashCode>
+      <FileName>Code\LinkedList\List.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.LinkedList.MultiSetSortedLinkedList" Collapsed="true">
+    <Position X="0.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\LinkedList\MultiSetSortedLinkedList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.LinkedList.MultiSetUnsortedLinkedList" Collapsed="true">
+    <Position X="5.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAABAAAAAAAAAAAAAAAAAAAQAAAQAAAAAAAA=</HashCode>
+      <FileName>Code\LinkedList\MultiSetUnsortedLinkedList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.LinkedList.SetSortedLinkedList" Collapsed="true">
+    <Position X="0.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\LinkedList\SetSortedLinkedList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.LinkedList.SetUnsortedLinkedList" Collapsed="true">
+    <Position X="5.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\LinkedList\SetUnsortedLinkedList.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AlgoDat_Praktikum.Code.Treap.Treap" Collapsed="true">
+    <Position X="14" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAABQAAAAAAAAAQAAgAAAAAAAAEAAAAAAoAA=</HashCode>
+      <FileName>Code\Treap\Treap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HashHelper" Collapsed="true">
+    <Position X="13" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\Hash\HashHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="AlgoDat_Praktikum.Code.Interfaces.IDictionary" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAABAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Code\Interfaces\IDictionary.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AlgoDat_Praktikum.Code.Interfaces.IMultiSetSorted&lt;T&gt;" Collapsed="true">
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\Interfaces\IMultiSetSorted.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AlgoDat_Praktikum.Code.Interfaces.IMultiSetUnsorted&lt;T&gt;" Collapsed="true">
+    <Position X="9.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\Interfaces\IMultiSetUnsorted.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AlgoDat_Praktikum.Code.Interfaces.ISearchHelper&lt;T&gt;" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\Interfaces\ISearchHelper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AlgoDat_Praktikum.Code.Interfaces.ISetSorted&lt;T&gt;" Collapsed="true">
+    <Position X="12" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\Interfaces\ISetSorted.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AlgoDat_Praktikum.Code.Interfaces.ISetUnsorted&lt;T&gt;" Collapsed="true">
+    <Position X="5.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Code\Interfaces\ISetUnsorted.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
