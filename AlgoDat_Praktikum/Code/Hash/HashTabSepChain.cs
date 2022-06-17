@@ -27,7 +27,10 @@ namespace AlgoDat_Praktikum.Code.Hash
             for (int i = 0; i < memory[newKey].Count; i++)
             {
                 if (memory[newKey][i] == key)
+                {
+                    SearchHelper = newKey;
                     return true;
+                }
 
             }
             return false;
@@ -51,10 +54,18 @@ namespace AlgoDat_Praktikum.Code.Hash
 
         public void print(){
             for(int i=0;i<Size;i++){
-                for (int j = 0; j < memory[i].Count - 1; j++)
+                if(memory[i].Count == 0)
+                    Console.WriteLine(i + ": \t--");
+                else
                 {
-                    Console.WriteLine(i + ": \t" + memory[i][j]);
+                    Console.Write(i + ": \t[");
+                    for (int j = 0; j < memory[i].Count - 1; j++)
+                    {
+                        Console.Write(memory[i][j] + ", ");
+                    }
+                    Console.Write(memory[i][memory[i].Count - 1] + "]\n");
                 }
+                
             }
         }
 
