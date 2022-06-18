@@ -1,7 +1,6 @@
 ﻿using AlgoDat_Praktikum.Code.Interfaces;
 using System;
 
-
 namespace AlgoDat_Praktikum.Code.Hash
 {
     public class HashTabQuadProb: HashHelper, ISetUnsorted<int> 
@@ -21,18 +20,26 @@ namespace AlgoDat_Praktikum.Code.Hash
         public bool search(int elem){
             int newKey = divisionRestMethode(elem, Size);
             if(memory[newKey] == elem)
+            {
+                SearchHelper = newKey;
                 return true;
-            // if (memory[newKey] == -1) is most likely wrong code
-            //     return false;
+            }
             for (int i = 1; i < newKey; i++)
             {
                 if(memory[newKey-i] == elem)
+                {
+                    SearchHelper = newKey - i;
                     return true;
+                }
+                    
             }
             for (int i = 1; i < Size - newKey; i++)
             {
-                if(memory[newKey+i] == elem)
+                if (memory[newKey + i] == elem)
+                {
+                    SearchHelper = newKey + i;
                     return true;
+                }
             }
             return false;
             
@@ -90,7 +97,10 @@ namespace AlgoDat_Praktikum.Code.Hash
 
         public void print(){
             for(int i=0;i<Size;i++){
-               Console.WriteLine(i+ ": \t" + memory[i]);
+                if (memory[i] == -1)
+                    Console.WriteLine(i + ": \t--");
+                else
+                    Console.WriteLine(i + ": \t" + memory[i]);
             }
         }
     }

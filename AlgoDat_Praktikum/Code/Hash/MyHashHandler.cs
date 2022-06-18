@@ -5,7 +5,6 @@ namespace AlgoDat_Praktikum.Code.Hash
 {
     public static class HashHandler
     {
-
         static ISetUnsorted<int> hashtable;
         static int Size;
 
@@ -47,8 +46,8 @@ namespace AlgoDat_Praktikum.Code.Hash
             Console.WriteLine("2. Daten löschen");
             Console.WriteLine("3. Daten suchen");
             Console.WriteLine("4. Daten anzeigen");
-            string input = Console.ReadLine();
-            int selection = ConvertInputToInt(input);
+            ConsoleKeyInfo input = Console.ReadKey();
+            int selection = ConvertInputToSelection(input);
             switch (selection)
             {
                 case 1:
@@ -85,7 +84,7 @@ namespace AlgoDat_Praktikum.Code.Hash
             int selection = ConvertInputToInt(input);
             if (hashtable.search(selection))
             {
-                Console.WriteLine("Der Wert existiert in deinem Hashtable");
+                Console.WriteLine("Der Wert existiert in deinem Hashtable an der Stelle " + hashtable.SearchHelper);
             }
             else
             {
@@ -135,8 +134,6 @@ namespace AlgoDat_Praktikum.Code.Hash
             Console.ReadLine();
         }
 
-
-
         static void insertData()
         {
             Console.Clear();
@@ -165,14 +162,13 @@ namespace AlgoDat_Praktikum.Code.Hash
             Random r = new Random();
             for (int i = 0; i < Size; i++)
             {
-                hashtable.insert(r.Next(0, Size * 2));
+                hashtable.insert(r.Next(0, Size * 10));
             }
-            hashtable.print();
         }
 
         static void Initialize()
         {
-            Console.Clear();
+            Console.WriteLine();
             Console.WriteLine("Wie groß soll dein Hashtable sein?");
             Console.WriteLine("Es wird per default die nächst größere Primzahl angenommen");
             string input = Console.ReadLine();
@@ -183,15 +179,34 @@ namespace AlgoDat_Praktikum.Code.Hash
                 Console.WriteLine("Wie groß soll dein Hashtable sein?");
                 input = Console.ReadLine();
             }
+
+            Size = findNextPrime(size);
+            Console.Clear();
+            Console.WriteLine("Die nächst größere Primzahl ist " + Size);
             Console.WriteLine("Alles Klar, dann generiere ich jetzt einen Hashtable für dich");
             Console.WriteLine();
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 80; i++)
             {
-                System.Threading.Thread.Sleep(20);
+                System.Threading.Thread.Sleep(40);
                 Console.Write(".");
             }
             Console.WriteLine();
-            Size = findNextPrime(size);
+        }
+
+        static int ConvertInputToSelection(ConsoleKeyInfo input)
+        {
+            int selection;
+            while (!Int32.TryParse(input.KeyChar.ToString(), out selection))
+            {
+                if (input.Key == ConsoleKey.Escape)
+                {
+                    System.Environment.Exit(-1);
+                }
+                Console.WriteLine("das ist leider keine Zahl :<");
+                input = Console.ReadKey();
+                
+            }
+            return selection;
         }
 
         static int ConvertInputToInt(string input)
@@ -217,10 +232,10 @@ namespace AlgoDat_Praktikum.Code.Hash
                     if (counter % i == 0)
                     {
                         isPrime = false;
+                        counter++;
                         break;
                     }
                 }
-                counter++;
             }
             return counter;
         }
