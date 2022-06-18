@@ -5,7 +5,6 @@ namespace AlgoDat_Praktikum.Code.Hash
 {
     public static class HashHandler
     {
-
         static ISetUnsorted<int> hashtable;
         static int Size;
 

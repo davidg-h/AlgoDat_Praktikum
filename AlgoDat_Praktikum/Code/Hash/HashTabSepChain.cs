@@ -7,63 +7,53 @@ namespace AlgoDat_Praktikum.Code.Hash
     public class HashTabSepChain: HashHelper, ISetUnsorted<int> {
         
         public int Size;
-        //TODO: own Datatype for ArrayList
-        List<int>[] memory;
+        LinkedList.MultiSetSortedLinkedList[] memory;
         public int SearchHelper { get; set; }
 
     
         public HashTabSepChain(int size){
             this.Size = size;   
-            memory = new List<int>[Size];
+            memory = new LinkedList.MultiSetSortedLinkedList[Size];
             for (int i = 0; i < Size; i++)
             {
-                memory[i] = new List<int>();
+                memory[i] = new LinkedList.MultiSetSortedLinkedList();
             }
         }
 
         public bool search(int key)
         {
             int newKey = divisionRestMethode(key);
-            for (int i = 0; i < memory[newKey].Count; i++)
-            {
-                if (memory[newKey][i] == key)
-                {
-                    SearchHelper = newKey;
-                    return true;
-                }
-
-            }
-            return false;
+            bool result = memory[newKey].search(newKey);
+            if(result)
+                SearchHelper = memory[newKey].SearchHelper.data;
+            return result;
         }
 
         public bool insert(int elem)
         {
             int newKey = divisionRestMethode(elem);
-            if (memory[newKey] == null)
-                memory[newKey] = new List<int>();
-            memory[newKey].Add(elem);
+            // if (memory[newKey] == null)
+            //     memory[newKey] = new LinkedList.MultiSetSortedLinkedList();
+            memory[newKey].insert(elem);
             return true;
         }
 
         public bool delete(int elem)
         {
             int newKey = divisionRestMethode(elem);
-            memory[newKey].Remove(elem);
+            memory[newKey].delete(elem);
             return true;
         }
 
         public void print(){
             for(int i=0;i<Size;i++){
-                if(memory[i].Count == 0)
+                if(memory[i].head == null)
                     Console.WriteLine(i + ": \t--");
                 else
                 {
-                    Console.Write(i + ": \t[");
-                    for (int j = 0; j < memory[i].Count - 1; j++)
-                    {
-                        Console.Write(memory[i][j] + ", ");
-                    }
-                    Console.Write(memory[i][memory[i].Count - 1] + "]\n");
+                    Console.Write(i + ": \t\n[");
+                    memory[i].print();
+                    Console.Write("]\n");
                 }
                 
             }
