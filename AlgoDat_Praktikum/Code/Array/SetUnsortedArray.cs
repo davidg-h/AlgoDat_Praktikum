@@ -11,59 +11,80 @@ namespace AlgoDat_Praktikum.Code.Array_
     {
         public SetUnsortedArray(int size) : base(size) { }
 
-        // !!!! hier jeder wert nur einmal wegen Set
         public override bool insert(int element)
         {
-            if (element == 0) // 0 nicht zulässig
+            if (element == 0)       // 0 nicht zulässig
             {
                 return false;
             }
-            if (search(element)) // Falls Element schon vorhanden ist, return false
+            if (search(element))    // Falls Element schon vorhanden ist, return false
             {
+                Console.WriteLine("Element schon einmal im Array vorhanden. Bitte gebe eine neue Zahl ein!");
                 return false;
             }
-
-            //Prüfen ob Array leer ist
-            if (array[0] == 0)
+            if (array[0] == 0)      //Prüfen ob Array leer ist
             {
                 array[0] = element;
                 return true;
             }
-
-            // hier SearchHelper soll letzter index sein (wurde in search gesetzt), wo eingefügt wurde und dann den i + 1 index nehmen
-
-            //Einfügen des Elements
-           /* for (int i = 0; i < array.Length; i++)
+            else
             {
-                if (array[i] == 0)
+                for (int i = 0; i < array.Length; i++) //Einfügen 
                 {
-                    array[i] = element;
-                    return true;
+                    if (array[i] == 0)
+                    {
+                        array[i] = element;
+                        return true;
+                    }
                 }
-            }*/
-            return false;
-
-        }
-
-       /* public void print()
-        {
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array[i] == 0)
-                {
-                    Console.Write("[ ]" + " ");
-                }
-                else
-                {
-                    Console.Write("[" + array[i] + "]" + " ");
-                }
-
+                Console.WriteLine("Das Array ist bereits voll.");
+                return false;
             }
-        }*/
+        }
 
         public override void userHandling()
         {
-            throw new NotImplementedException();
+            do
+            {
+                Console.WriteLine("\n\nDu hast ein SetUnsortedArray ausgewählt!");
+                Console.WriteLine("1.Suche eine Zahl");
+                Console.WriteLine("2.Füge eine Zahl hinzu");
+                Console.WriteLine("3.Lösche eine Zahl");
+                Console.WriteLine("4.Ausgabe des Arrays");
+                var userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case "1":
+                        Console.WriteLine("\nWelche Zahl möchstest du suchen?");
+                        if (search(Convert.ToInt32(Console.ReadLine()))) { Console.WriteLine($"Deine Zahl wurde gefunden\n\n"); print(); }
+                        else { Console.WriteLine("Leeres Array/Zahl nicht im Array! Schaue nochmal die Ausgabe an\n\n"); print(); }
+                        break;
+                    case "2":
+                        Console.WriteLine("\nWelche Zahlen möchtest du hinzufügen?");
+                        var arr = Array.ConvertAll(Console.ReadLine().Trim().Split(','), Convert.ToInt32);
+                        foreach (int elem in arr)
+                        {
+                            insert(elem);
+                        }
+                        Console.WriteLine("\nDein Array:\n\n");
+                        print();
+                        break;
+                    case "3":
+                        Console.WriteLine("\nWelche Zahl möchstest du löschen?:");
+                        if (delete(Convert.ToInt32(Console.ReadLine()))) { Console.WriteLine("Deine Zahl wurde gelöscht. Dein neues Array:\n\n"); print(); }
+                        else { Console.WriteLine("Die Zahl gibt es nicht. Schaue am besten nochmal nach\n\n"); print(); }
+                        break;
+                    case "4":
+                        Console.WriteLine("\nAusgabe des Arrays:\n\n");
+                        print();
+                        break;
+                    default:
+                        Console.WriteLine("Ungültige Eingabe.");
+                        break;
+                }
+                Console.WriteLine("\n\nDrücke Esc um zu beenden");
+            } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
     }
 }

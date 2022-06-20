@@ -140,42 +140,42 @@
     </TypeIdentifier>
   </Class>
   <Interface Name="AlgoDat_Praktikum.Code.Interfaces.IDictionary" Collapsed="true">
-    <Position X="8.5" Y="0.5" Width="1.5" />
+    <Position X="8.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAABAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAA=</HashCode>
       <FileName>Code\Interfaces\IDictionary.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AlgoDat_Praktikum.Code.Interfaces.IMultiSetSorted&lt;T&gt;" Collapsed="true">
-    <Position X="7.5" Y="3.25" Width="1.5" />
+    <Position X="7.5" Y="3.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Code\Interfaces\IMultiSetSorted.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AlgoDat_Praktikum.Code.Interfaces.IMultiSetUnsorted&lt;T&gt;" Collapsed="true">
-    <Position X="9.75" Y="3.25" Width="1.5" />
+    <Position X="9.75" Y="3.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Code\Interfaces\IMultiSetUnsorted.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AlgoDat_Praktikum.Code.Interfaces.ISearchHelper&lt;T&gt;" Collapsed="true">
-    <Position X="8.5" Y="1.75" Width="1.5" />
+    <Position X="8.5" Y="1.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Code\Interfaces\ISearchHelper.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AlgoDat_Praktikum.Code.Interfaces.ISetSorted&lt;T&gt;" Collapsed="true">
-    <Position X="12" Y="3.25" Width="1.5" />
+    <Position X="12" Y="3.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Code\Interfaces\ISetSorted.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AlgoDat_Praktikum.Code.Interfaces.ISetUnsorted&lt;T&gt;" Collapsed="true">
-    <Position X="5.25" Y="3.25" Width="1.5" />
+    <Position X="5.25" Y="3.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Code\Interfaces\ISetUnsorted.cs</FileName>

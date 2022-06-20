@@ -8,8 +8,6 @@ namespace AlgoDat_Praktikum.Code.Array_
 {
     abstract class BaseArray
     {
-        // zum checken/setzten damit nicht immer geprüft werden muss, wenn array voll ist: wenn array.lenght -1 gesetzt wurde dann arrayFull = true;
-        internal bool arrayFull = false;
         public int[] array;
 
         public BaseArray(int size)
@@ -33,7 +31,6 @@ namespace AlgoDat_Praktikum.Code.Array_
             }
         }
 
-        // hier dann in allen geerbenten Klassen das Userhandling schreiben
         public abstract void userHandling();
     }
 }
