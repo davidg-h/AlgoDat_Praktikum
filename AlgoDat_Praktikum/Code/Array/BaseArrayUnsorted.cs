@@ -21,8 +21,6 @@ namespace AlgoDat_Praktikum.Code.Array_
             {
                 if (array[i] == element)
                 {
-                    // hier auch Searchhelper auf das element setzten damit delete einfacher wird
-                    // Searchhelper = i
                     return true;
                 }
             }
@@ -37,11 +35,14 @@ namespace AlgoDat_Praktikum.Code.Array_
             {
                 return false;
             }
-            // ganz äußere for schleife unnötig siehe baseArraySorted comments
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] == element)
                 {
+                    if (i == array.Length - 1)
+                    {
+                        array[i] = 0;
+                    }
                     for (int y = i; y < array.Length - 1; y++)
                     {
                         array[y] = array[y + 1];

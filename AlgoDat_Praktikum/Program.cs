@@ -5,6 +5,7 @@ using AlgoDat_Praktikum.Code.Treap;
 using AlgoDat_Praktikum.Code.Bin_SearchTree;
 using AlgoDat_Praktikum.Code.Hash;
 using AlgoDat_Praktikum.Code.LinkedList;
+using AlgoDat_Praktikum.Code.Array_;
 
 namespace AlgoDat_Praktikum
 {
@@ -17,6 +18,7 @@ namespace AlgoDat_Praktikum
 
             /* Treap treap = new Treap();
              treap.testTreap();*/
+            int arraySize = 0;
 
             Console.WriteLine("Wähle den abstrakten Datentypen aus:");
             Console.WriteLine("1. MultiSet unsorted");
@@ -30,14 +32,16 @@ namespace AlgoDat_Praktikum
             switch (userInput)
             {
                 case "1":
-                    // TODO: let your class handle the console inputs and error handling (only not negative numbers)
-                    // for more legible code in the main after user enters a concrete data type (s.r.: example)
                     Console.WriteLine("a. MultiSetUnsorted Array");
                     Console.WriteLine("b. MultiSetUnsorted LinkedList");
                     userInput = Console.ReadLine();
                     switch (userInput)
                     {
                         case "a":
+                            Console.WriteLine("Wieviele Werte sollen gespeichert werden?");
+                            arraySize = Convert.ToInt32(Console.ReadLine());
+                            MultiSetUnsortedArray multiSetUnsortedArray = new MultiSetUnsortedArray(arraySize);
+                            multiSetUnsortedArray.userHandling();
                             break;
                         case "b":
                             MultiSetUnsortedLinkedList multiSetUnsortedLinkedList = new MultiSetUnsortedLinkedList();
@@ -62,6 +66,12 @@ namespace AlgoDat_Praktikum
                         case "b":
                             HashHandler.handleSepChain();
                             break;
+                        case "c":
+                            Console.WriteLine("\nWie groß soll das Array sein?");
+                            arraySize = Convert.ToInt32(Console.ReadLine());
+                            SetUnsortedArray setUnsortedArray = new SetUnsortedArray(arraySize);
+                            setUnsortedArray.userHandling();
+                            break;
                         case "d":
                             SetUnsortedLinkedList setUnsortedLinkedList = new SetUnsortedLinkedList();
                             setUnsortedLinkedList.SetUnsortedHandler();
@@ -76,6 +86,10 @@ namespace AlgoDat_Praktikum
                     switch (userInput)
                     {
                         case "a":
+                            Console.WriteLine("\nWie groß soll das Array sein?");
+                            arraySize = Convert.ToInt32(Console.ReadLine());
+                            MultiSetSortedArray multiSetSortedArray = new MultiSetSortedArray(arraySize);
+                            multiSetSortedArray.userHandling();
                             break;
                         case "b":
                             MultiSetSortedLinkedList multiSetSortedLinkedList = new MultiSetSortedLinkedList();
@@ -107,6 +121,10 @@ namespace AlgoDat_Praktikum
                             avl.userHandler();
                             break;
                         case "d":
+                            Console.WriteLine("\nWie groß soll das Array sein?");
+                            arraySize = Convert.ToInt32(Console.ReadLine());
+                            SetSortedArray setSortedArray = new SetSortedArray(arraySize);
+                            setSortedArray.userHandling();
                             break;
                         case "e":
                             SetSortedLinkedList setSortedLinkedList = new SetSortedLinkedList();

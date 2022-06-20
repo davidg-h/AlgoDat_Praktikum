@@ -26,27 +26,21 @@ namespace AlgoDat_Praktikum.Code.Array_
             {
                 i = (l + r) / 2;
                 if (array[i] < element)
-                {   //                                                0  1  2  3  4
-                    // Logik stimmt hier glaub ich nicht richtg weil: 1, 3, 4, 6, 8  -> l = 2 + 1 = 3 --> i = (3+4) / 2 = 3
-                    // müsste glaub ich l = l + 1 sein
+                {
                     l = i + 1;
                 }
                 else
                 {
-                    // r = r - 1
                     r = i - 1;
                 }
-            } while (array[i] != element && l < r);
+            } while (array[i] != element && l <= r);
 
             if (array[i] == element)
             {
-                SearchHelper = i; // das gesuchte element als index im array
                 return true;
             }
             else
             {
-                // neues element soll nach diesem index eingefügt werden
-                // SearchHelper = i; Searchhelper so setzen dass das element welches eingefügt werden soll nach dem index i kommt
                 return false;
             }
         }
@@ -57,23 +51,23 @@ namespace AlgoDat_Praktikum.Code.Array_
             {
                 return false;
             }
-            // hier dann nicht nochmal durch das array iterieren sondern mit dem Searchhelper(hat den index des zu löschenden elementes) arbeiten -> ganz äußere for schleife ist dann unnötig
-            // heißt: alles was nach dem index kommt aufrücken: 1 3 4 6 8  (gelöscht wird 4 -> hat index 2) -> 1 3 6 8 (6 & 8 sind vorgerückt) 
-            // wenn löschen erfolgreich dann true zurückgeben
-            /* for (int i = 0; i < array.Length; i++)
-             {
-                 if (array[i] == element)
-                 {
-                     for (int y = i; y < array.Length - 1; y++)
-                     {
-            // nevermnind das aufrücken hast du schon xd
-                         array[y] = array[y + 1];
-                         array[y + 1] = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == element)
+                {
+                    if (i == array.Length - 1)
+                    {
+                        array[i] = 0;
+                    }
+                    for (int y = i; y < array.Length - 1; y++)
+                    {
+                        array[y] = array[y + 1];
+                        array[y + 1] = 0;
 
-                     }
-                     return true;
-                 }
-             }*/
+                    }
+                    return true;
+                }
+            }
             return false;
         }
 
