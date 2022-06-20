@@ -125,6 +125,7 @@ namespace AlgoDat_Praktikum.Code.AVLTree
             //start with parent and keep checking the parent Nodes because only they are still important after rotation
             if (nodeUnderScope.Parent != null)
             {
+                BalanceFactorParent(nodeUnderScope.Parent);
                 CheckBalanceFactor(nodeUnderScope.Parent);
             }
             return true;
