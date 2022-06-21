@@ -20,7 +20,7 @@ namespace AlgoDat_Praktikum.Code.LinkedList
                 Console.WriteLine("1.Suche eine Zahl");
                 Console.WriteLine("2.Füge eine/mehrere Zahl/en hinzu");
                 Console.WriteLine("3.Lösche eine Zahl");
-                Console.WriteLine("4.Ausgabe des Treaps");
+                Console.WriteLine("4.Ausgabe der Liste");
                 var userInput = Console.ReadLine();
 
                 switch (userInput)
