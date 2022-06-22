@@ -223,7 +223,7 @@ namespace AlgoDat_Praktikum.Code.Hash
         static int findNextPrime(int number)
         {
             bool isPrime = false;
-            int counter = number;
+            int counter = number - (number) % 4 + 3;
             while (!isPrime)
             {
                 isPrime = true;
@@ -232,7 +232,7 @@ namespace AlgoDat_Praktikum.Code.Hash
                     if (counter % i == 0)
                     {
                         isPrime = false;
-                        counter++;
+                        counter += 4;
                         break;
                     }
                 }

@@ -5,9 +5,8 @@ namespace AlgoDat_Praktikum.Code.Hash
 {
     public class HashTabQuadProb: HashHelper, ISetUnsorted<int> 
     {
-        public int Size;
         int[] memory;
-        public int SearchHelper { get; set; }
+
         public HashTabQuadProb(int size){
             this.Size = size;
             memory = new int[Size];
@@ -17,82 +16,73 @@ namespace AlgoDat_Praktikum.Code.Hash
             }
         }
 
-        public bool search(int elem){
-            int newKey = divisionRestMethode(elem, Size);
-            if(memory[newKey] == elem)
+        public bool search(int value){
+            int key = modulo(value, Size);
+            int nextFree = -1;
+            if(memory[key] == value)
             {
-                SearchHelper = newKey;
+                SearchHelper = key;
                 return true;
             }
-            for (int i = 1; i < newKey; i++)
+            if (memory[key] == -1)
             {
-                if(memory[newKey-i] == elem)
+                nextFree = key;
+            }
+            for (int i = 1; i < Size / 2 + 1; i++)
+            {
+                int offset = i * i;
+                int newKey = modulo(key + offset, Size);
+                if(nextFree == -1 && memory[newKey] == -1){     //nextFree noch nicht gesetzt
+                    nextFree = newKey;
+                }
+                else if(memory[newKey] == value)
                 {
-                    SearchHelper = newKey - i;
+                    SearchHelper = newKey;
                     return true;
                 }
-                    
-            }
-            for (int i = 1; i < Size - newKey; i++)
-            {
-                if (memory[newKey + i] == elem)
+                newKey = modulo(key - offset, Size);
+                if (nextFree == -1 && memory[newKey] == -1){
+                    nextFree = newKey;
+                }
+                if(memory[newKey] == value)
                 {
-                    SearchHelper = newKey + i;
+                    SearchHelper = newKey;
                     return true;
                 }
             }
+            SearchHelper = nextFree;
             return false;
             
         }  // true = gefunden
 
 
-        public bool insertSondierung(int key, int value){
-            if(memory[key] == -1){
-                memory[key] = value;
-                return true;
-            }
-            else{
-                int i = 1;
-                //look at left side for free data cell
-                while(key-i >= 0 && memory[key-i] != -1) i++;
-                if(key-i >= 0) {
-                    //free memory cell found
-                    memory[key-i] = value;
-                }
-                else{
-                    i = 1;
-                    //look at right side for free data cell
-                    while(key+i <= Size && memory[key+i] != -1) i++;
-                    if(key + i < Size) {
-                        //free memory cell found
-                        memory[key+i] = value;
-                    }
-                    else{
-                        //if not on left nor on right side free space
-                        return false;
-                    }
-                }
-                return true;
-            }
-        }
-        public bool insert2(int valueKey)
-        {
-            int newKey = divisionRestMethode(valueKey, Size);
-            return insertSondierung(newKey, valueKey);
-        }
+        public bool insertQuadraticProbing(int value){
 
-        public bool insert(int valueKey)
-        {
-            int newKey = divisionRestMethode((int)Math.Pow(valueKey,2), Size);
-            return insertSondierung(newKey, valueKey);
-        }
-
-        public bool delete(int elem){
-            int value = divisionRestMethode(elem, Size);
-            if (value == -1)
+            if(search(value)){
+                System.Console.WriteLine("Wert " + value + " schon vorhanden");
+                Console.ReadKey();
                 return false;
-            memory[divisionRestMethode(elem, Size)] = -1;
+            }
+            if(SearchHelper == -1){
+                System.Console.WriteLine("HashTable ist voll");
+                Console.ReadKey();
+                return false;
+            }
+            memory[SearchHelper] = value;
             return true;
+        }
+
+        public bool insert(int value)
+        {
+            return insertQuadraticProbing(value);
+        }
+
+        public bool delete(int value){
+            if(search(value)){
+                memory[SearchHelper] = -1;
+                return true;
+            }
+            return false;
         } // true = gelöscht
 
         public void print(){
