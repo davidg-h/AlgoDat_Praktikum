@@ -6,10 +6,7 @@ namespace AlgoDat_Praktikum.Code.Hash
 {
     public class HashTabSepChain: HashHelper, ISetUnsorted<int> {
         
-        public int Size;
         LinkedList.SetUnsortedLinkedList[] memory;
-        public int SearchHelper { get; set; }
-
     
         public HashTabSepChain(int size){
             this.Size = size;   
